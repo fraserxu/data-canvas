@@ -3,7 +3,7 @@
 var React = require('react')
 var d3 = require('d3')
 
-var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=100000'
+var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=500'
 
 var Sparkline = React.createClass({
 
