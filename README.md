@@ -9,6 +9,7 @@ My datasource is available here: https://localdata-sensors.herokuapp.com/api/sou
 * `make build` Build with browserify
 * `make watch` Watchify
 * `make clean` Clean the dist folder
+* `make deploy` Push to gh-pages
 
 ### Licese
 MIT
