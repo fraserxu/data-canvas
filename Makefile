@@ -11,6 +11,7 @@ deploy:
 	git checkout -b gh-pages && \
 	git reset --hard origin/master && \
 	make install && \
+	mkdir -p dist && \
 	make build && \
 	git add -Af dist && \
 	git commit -am 'gh-pages update' && \
