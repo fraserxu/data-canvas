@@ -30,4 +30,4 @@ watch:
 clean:
 	rm -f $(DIST_DIR)/main.js
 
-.PHONY: install build watch clean
+.PHONY: deploy install build watch clean
