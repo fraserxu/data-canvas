@@ -10,6 +10,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <header>Realtime Airquality data from Wiredcraft office</header>
         <Sparkline />
       </div>
     )

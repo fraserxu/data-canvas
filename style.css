@@ -7,6 +7,12 @@ text {
   font: 10px sans-serif;
 }
 
+header {
+  text-align: center;
+  margin: 20px auto;
+  font-size: 24px;
+}
+
 .axis path,
 .axis line {
   fill: none;

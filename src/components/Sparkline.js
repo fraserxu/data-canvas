@@ -2,8 +2,9 @@
 
 var React = require('react')
 var d3 = require('d3')
+var moment = require('moment')
 
-var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=500'
+var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=1000&sort=desc'
 
 var Sparkline = React.createClass({
 
@@ -26,7 +27,7 @@ var Sparkline = React.createClass({
     var parseDate = d3.time.format("%Y-%m-%d %X").parse
 
     var xScale = d3.time.scale()
-      .range([0, width])
+      .range([width, 0])
 
     var yScale = d3.scale.linear()
       .range([height, 0])
@@ -52,11 +53,9 @@ var Sparkline = React.createClass({
 
     d3.json(DATA_URL, function(data) {
       data.forEach(function(d) {
-        d.date = parseDate(d['timestamp'].replace('T', ' ').replace('.000Z', ''))
+        d.date = parseDate(moment(d['timestamp']).format().replace('T', ' ').replace('+08:00', ''))
         d.aqi = +d.data['airquality_raw']
       })
-
-      console.log('data', data)
 
       xScale.domain([data[0].date, data[data.length - 1].date])
       yScale.domain(d3.extent(data, function(d) { return d.aqi }))
