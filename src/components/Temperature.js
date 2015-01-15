@@ -8,7 +8,7 @@ var Temperature = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'temperature'} type={'Temperature(℃)'} yDomain={[0, 20]}/>
+        <Sparkline data={this.props.data} indicator={'temperature'} type={'Temperature(℃)'} yDomain={[5, 20]}/>
       </section>
     );
   }

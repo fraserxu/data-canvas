@@ -8,7 +8,7 @@ var Sound = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'sound'} type={'Sound'} yDomain={[0, 3000]}/>
+        <Sparkline data={this.props.data} indicator={'sound'} type={'Sound'} yDomain={[500, 3000]}/>
       </section>
     );
   }

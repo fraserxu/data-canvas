@@ -8,7 +8,7 @@ var Light = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'light'} type={'Light'} yDomain={[0, 50]}/>
+        <Sparkline data={this.props.data} indicator={'light'} type={'Light'} yDomain={[0, 1000]}/>
       </section>
     );
   }

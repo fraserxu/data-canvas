@@ -8,7 +8,7 @@ var UV = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'uv'} type={'UV'} yDomain={[100, 400]}/>
+        <Sparkline data={this.props.data} indicator={'uv'} type={'UV'} yDomain={[250, 300]}/>
       </section>
     );
   }
