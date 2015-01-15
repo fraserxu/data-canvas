@@ -9,8 +9,12 @@ text {
 
 header {
   text-align: center;
+}
+
+header h1{
+  text-align: center;
   margin: 20px auto;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .axis path,

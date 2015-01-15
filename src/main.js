@@ -41,9 +41,21 @@ var App = React.createClass({
   },
 
   render() {
+    var address = 'loading address...'
+    if (this.state.data[0]) {
+      address = this.state.data[0].address.display_name
+    }
+
     return (
       <div>
-        <header>Realtime Airquality data from Wiredcraft office</header>
+        <header>
+          <h1>Realtime sensor data from <small><i>{address}</i></small></h1>
+          <i>To use your own data, add "?source=YOUR_SOURCE" to the url in the address bar.</i>
+          <p>
+            <i>© Made by <a href='https://fraserxu.me'>Fraser Xu</a>.</i>
+          </p>
+        </header>
+
         <Air data={this.state.data} />
         <Temperature data={this.state.data} />
         <Dust data={this.state.data} />
