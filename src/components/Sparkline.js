@@ -4,7 +4,7 @@ var React = require('react')
 var d3 = require('d3')
 var moment = require('moment')
 
-var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=1000&sort=desc'
+var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=5000&sort=desc'
 
 var Sparkline = React.createClass({
 
@@ -58,7 +58,7 @@ var Sparkline = React.createClass({
       })
 
       xScale.domain([data[0].date, data[data.length - 1].date])
-      yScale.domain(d3.extent(data, function(d) { return d.aqi }))
+      yScale.domain([20, 45])
 
       svg.append('linearGradient')
         .attr('id', 'aqi-gradient')

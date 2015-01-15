@@ -37,3 +37,12 @@ header {
 .line.above {
   stroke: #f00;
 }
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+table tr {
+  display: inline-block;
+}
