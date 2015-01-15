@@ -1,6 +1,7 @@
 'use strict'
 
 var React = require('react')
+var qs = require('querystring')
 var api = require('./utils/api')
 
 var Air = require('./components/Air')
@@ -22,11 +23,19 @@ var App = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchData('', {})
+    try {
+      var search = location.search.replace('?', '')
+      var source = qs.parse(search).source
+      this.fetchData('', {
+        source: source
+      })
+    } catch (e) {
+      this.fetchData('', {})
+    }
   },
 
   fetchData(url, options) {
-    api.fetchData(url = '', options = {}, (err, data) => {
+    api.fetchData(url, options, (err, data) => {
       if (this.isMounted()) this.setState({data: data})
     })
   },
