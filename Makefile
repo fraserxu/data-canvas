@@ -18,11 +18,11 @@ deploy:
 	git remote set-url origin $(GITHUB_REPO) && \
 	git push -ufq origin gh-pages
 
-install: 
+install:
 	npm install
 
 build:
-	$(NODE_BIN)/browserify $(SRC_DIR)/main.js -t 6to5ify --outfile $(DIST_DIR)/main.js | $(NODE_BIN)/uglifyjs -mc > $(DIST_DIR)/main.js
+	$(NODE_BIN)/browserify $(SRC_DIR)/main.js -t 6to5ify | $(NODE_BIN)/uglifyjs -mc > $(DIST_DIR)/main.js
 
 watch:
 	$(NODE_BIN)/watchify $(SRC_DIR)/main.js -t 6to5ify -o $(DIST_DIR)/main.js -dv & \
