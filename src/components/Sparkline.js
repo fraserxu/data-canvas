@@ -4,8 +4,6 @@ var React = require('react')
 var d3 = require('d3')
 var moment = require('moment')
 
-var DATA_URL = 'https://localdata-sensors.herokuapp.com/api/sources/ci4s0caqw000002wey2s695ph/entries?startIndex=0&count=5000&sort=desc'
-
 var Sparkline = React.createClass({
 
   displayName: 'Sparkline',
@@ -17,7 +15,15 @@ var Sparkline = React.createClass({
     }
   },
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data) this.drawChart(nextProps.data)
+  },
+
+  drawChart(data) {
+    var el = this.getDOMNode()
+    while (el.firstChild) {
+      el.removeChild(el.firstChild)
+    }
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50}
     var foot = {height: 30}
@@ -51,54 +57,51 @@ var Sparkline = React.createClass({
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    d3.json(DATA_URL, function(data) {
-      data.forEach(function(d) {
-        d.date = parseDate(moment(d['timestamp']).format().replace('T', ' ').replace('+08:00', ''))
-        d.aqi = +d.data['airquality_raw']
-      })
-
-      xScale.domain([data[0].date, data[data.length - 1].date])
-      yScale.domain([20, 45])
-
-      svg.append('linearGradient')
-        .attr('id', 'aqi-gradient')
-        .attr('gradientUnits', 'userSpaceOnUse')
-        .attr('x1', 0).attr('y1', yScale(d3.min(data, function(d) { return d.aqi })))
-        .attr('x2', 0).attr('y2', yScale(d3.max(data, function(d) { return d.aqi })))
-        .selectAll('stop')
-        .data([
-          {offset: '0%', color: 'green'},
-          {offset: '25%', color: 'yellow'},
-          {offset: '50%', color: 'orange'},
-          {offset: '75%', color: 'red'},
-          {offset: '100%', color: 'purple'}
-        ])
-        .enter()
-        .append('stop')
-        .attr('offset', function(d) { return d.offset })
-        .attr('stop-color', function(d) { return d.color })
-
-      svg.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis)
-
-      svg.append('g')
-        .attr('class', 'y axis')
-        .call(yAxis)
-        .append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .text('AQI')
-
-      svg.append('path')
-        .datum(data)
-        .attr('class', 'line gradient')
-        .attr('d', line)
+    data.forEach(function(d) {
+      d.date = parseDate(moment(d['timestamp']).format().replace('T', ' ').replace('+08:00', ''))
+      d.aqi = +d.data['airquality_raw']
     })
 
+    xScale.domain([data[0].date, data[data.length - 1].date])
+    yScale.domain([20, 45])
+
+    svg.append('linearGradient')
+      .attr('id', 'aqi-gradient')
+      .attr('gradientUnits', 'userSpaceOnUse')
+      .attr('x1', 0).attr('y1', yScale(d3.min(data, function(d) { return d.aqi })))
+      .attr('x2', 0).attr('y2', yScale(d3.max(data, function(d) { return d.aqi })))
+      .selectAll('stop')
+      .data([
+        {offset: '0%', color: 'green'},
+        {offset: '25%', color: 'yellow'},
+        {offset: '50%', color: 'orange'},
+        {offset: '75%', color: 'red'},
+        {offset: '100%', color: 'purple'}
+      ])
+      .enter()
+      .append('stop')
+      .attr('offset', function(d) { return d.offset })
+      .attr('stop-color', function(d) { return d.color })
+
+    svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis)
+
+    svg.append('g')
+      .attr('class', 'y axis')
+      .call(yAxis)
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 6)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('AQI')
+
+    svg.append('path')
+      .datum(data)
+      .attr('class', 'line gradient')
+      .attr('d', line)
   },
 
   render() {
