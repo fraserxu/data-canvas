@@ -46,3 +46,13 @@ table {
 table tr {
   display: inline-block;
 }
+
+.container {
+  text-align: center;
+  width: 100%;
+  height: 332px;
+}
+
+.container .body {
+  height: 304px;
+}

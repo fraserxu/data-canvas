@@ -10,8 +10,10 @@ var Sparkline = React.createClass({
 
   getDefaultProps() {
     return {
-      width: 960,
-      height: 500
+      width: 600,
+      height: 300,
+      type: 'chart',
+      yDomain: [0, 40]
     }
   },
 
@@ -30,26 +32,25 @@ var Sparkline = React.createClass({
     var width = this.props.width - margin.left - margin.right
     var height = this.props.height - margin.top - margin.bottom
 
-    var parseDate = d3.time.format("%Y-%m-%d %X").parse
+    function formatDate(d) {
+      var parseDate = d3.time.format("%Y-%m-%d %X").parse
+      return parseDate(moment(d['timestamp']).format().replace('T', ' ').replace('+08:00', ''))
+    }
 
-    var xScale = d3.time.scale()
-      .range([width, 0])
+    var xScale = d3.time.scale().range([width, 0])
+    var yScale = d3.scale.linear().range([height, 0])
 
-    var yScale = d3.scale.linear()
-      .range([height, 0])
-
-    var xAxis = d3.svg.axis()
-      .scale(xScale)
-      .orient('bottom')
-
-    var yAxis = d3.svg.axis()
-      .scale(yScale)
-      .orient('left')
+    var xAxis = d3.svg.axis().scale(xScale).orient('bottom')
+    var yAxis = d3.svg.axis().scale(yScale).orient('left')
 
     var line = d3.svg.line()
       .interpolate('basis')
-      .x(function(d) { return xScale(d.date) })
-      .y(function(d) { return yScale(d.aqi) })
+      .x((d) => {
+        return xScale(formatDate(d))
+      })
+      .y((d) => {
+        return yScale(d.data[this.props.indicator])
+      })
 
     var svg = d3.select(this.getDOMNode()).append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -57,19 +58,14 @@ var Sparkline = React.createClass({
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    data.forEach(function(d) {
-      d.date = parseDate(moment(d['timestamp']).format().replace('T', ' ').replace('+08:00', ''))
-      d.aqi = +d.data['airquality_raw']
-    })
-
-    xScale.domain([data[0].date, data[data.length - 1].date])
-    yScale.domain([20, 45])
+    xScale.domain( [formatDate(data[0]), formatDate(data[data.length - 1])] )
+    yScale.domain(this.props.yDomain)
 
     svg.append('linearGradient')
       .attr('id', 'aqi-gradient')
       .attr('gradientUnits', 'userSpaceOnUse')
-      .attr('x1', 0).attr('y1', yScale(d3.min(data, function(d) { return d.aqi })))
-      .attr('x2', 0).attr('y2', yScale(d3.max(data, function(d) { return d.aqi })))
+      .attr('x1', 0).attr('y1', yScale(d3.min(data, (d) => d.data[this.props.indicator] )))
+      .attr('x2', 0).attr('y2', yScale(d3.max(data, (d) => d.data[this.props.indicator] )))
       .selectAll('stop')
       .data([
         {offset: '0%', color: 'green'},
@@ -80,8 +76,8 @@ var Sparkline = React.createClass({
       ])
       .enter()
       .append('stop')
-      .attr('offset', function(d) { return d.offset })
-      .attr('stop-color', function(d) { return d.color })
+      .attr('offset', (d) => d.offset)
+      .attr('stop-color', (d) => d.color)
 
     svg.append('g')
       .attr('class', 'x axis')
@@ -96,7 +92,7 @@ var Sparkline = React.createClass({
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('AQI')
+      .text(this.props.type)
 
     svg.append('path')
       .datum(data)
@@ -106,7 +102,7 @@ var Sparkline = React.createClass({
 
   render() {
     return (
-      <div />
+      <div className='body' />
     )
   }
 

@@ -3,8 +3,13 @@
 var React = require('react')
 var api = require('./utils/api')
 
-var Sparkline = require('./components/Sparkline')
-var SparklineLegend = require('./components/SparklineLegend')
+var Air = require('./components/Air')
+var Temperature = require('./components/Temperature')
+var Dust = require('./components/Dust')
+var Sound = require('./components/Sound')
+var Humidity = require('./components/Humidity')
+var UV = require('./components/UV')
+var Light = require('./components/Light')
 
 var App = React.createClass({
 
@@ -30,8 +35,13 @@ var App = React.createClass({
     return (
       <div>
         <header>Realtime Airquality data from Wiredcraft office</header>
-        <Sparkline data={this.state.data} />
-        <SparklineLegend />
+        <Air data={this.state.data} />
+        <Temperature data={this.state.data} />
+        <Dust data={this.state.data} />
+        <Sound data={this.state.data} />
+        <Humidity data={this.state.data} />
+        <UV data={this.state.data} />
+        <Light data={this.state.data} />
       </div>
     )
   }

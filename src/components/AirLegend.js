@@ -1,8 +1,8 @@
 var React = require('react');
 
-var SparklineLegend = React.createClass({
+var AirLegend = React.createClass({
 
-  displayName: 'SparklineLegend',
+  displayName: 'AirLegend',
 
   render() {
     return (
@@ -35,4 +35,4 @@ var SparklineLegend = React.createClass({
 
 });
 
-module.exports = SparklineLegend;
+module.exports = AirLegend;
