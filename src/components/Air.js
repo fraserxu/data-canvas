@@ -9,7 +9,7 @@ var Air = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'airquality_raw'} type={'Air'} yDomain={[20, 40]}/>
+        <Sparkline data={this.props.data} indicator={'airquality_raw'} type={'Air'} />
         <AirLegend />
       </section>
     );

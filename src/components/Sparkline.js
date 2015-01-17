@@ -12,8 +12,7 @@ var Sparkline = React.createClass({
     return {
       width: 600,
       height: 300,
-      type: 'chart',
-      yDomain: [0, 40]
+      type: 'chart'
     }
   },
 
@@ -38,7 +37,7 @@ var Sparkline = React.createClass({
     }
 
     var xScale = d3.time.scale().range([width, 0])
-    var yScale = d3.scale.linear().range([height, 0])
+    var yScale = d3.scale.linear().range([height - 20, 20])
 
     var xAxis = d3.svg.axis().scale(xScale).orient('bottom')
     var yAxis = d3.svg.axis().scale(yScale).orient('left')
@@ -59,7 +58,7 @@ var Sparkline = React.createClass({
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     xScale.domain( [formatDate(data[0]), formatDate(data[data.length - 1])] )
-    yScale.domain(this.props.yDomain)
+    yScale.domain(d3.extent(data.map((item) => item.data[this.props.indicator])))
 
     svg.append('linearGradient')
       .attr('id', 'aqi-gradient')
@@ -81,7 +80,7 @@ var Sparkline = React.createClass({
 
     svg.append('g')
       .attr('class', 'x axis')
-      .attr('transform', 'translate(0,' + height + ')')
+      .attr('transform', 'translate(0,' + (height - 20) + ')')
       .call(xAxis)
 
     svg.append('g')

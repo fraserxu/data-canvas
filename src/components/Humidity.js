@@ -8,7 +8,7 @@ var Humidity = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'humidity'} type={'Humidity'} yDomain={[30, 70]}/>
+        <Sparkline data={this.props.data} indicator={'humidity'} type={'Humidity'} />
       </section>
     );
   }

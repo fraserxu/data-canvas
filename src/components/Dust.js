@@ -8,7 +8,7 @@ var Dust = React.createClass({
   render() {
     return (
       <section className='container'>
-        <Sparkline data={this.props.data} indicator={'dust'} type={'Dust'} yDomain={[100, 4500]}/>
+        <Sparkline data={this.props.data} indicator={'dust'} type={'Dust'} />
       </section>
     );
   }
