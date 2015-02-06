@@ -123,7 +123,7 @@ var App = React.createClass({
             <p>This incomplete list is from what people post in the project Facebook group, I don't know where are those sense located, so I use openstreet map service to reverse the geocode to get the rough address, I guess there will be an official place to list all the sensor data someday.</p>
             <p>It's is an experiment to load the latest <b>5000</b> data gathering from the "sense your citry" project, it's still under developermnt.</p>
             <p>When I was trying to find the address, I find that many of the geo location provided by the sensor host are in the wrong order(lat/lng) or even wrong. I hope this will also help you to find the mistake if you can't find your location in the list.</p>
-            <p>Also, if you want your sensor show up but can't not find it in the list, send me an email(<a href="mailto:fraserxu@wiredcraft.com">fraserxu@wiredcraft</a>) and give me your data sourse url, I'll add it here.</p>
+            <p>Also, if you want your sensor show up but can't not find it in the list, send me an email(<a href="mailto:fraserxu@wiredcraft.com">fraserxu@wiredcraft.com</a>) and give me your data sourse url, I'll add it here.</p>
             <i>Last but not least, to use your own data, add "?source=YOUR_SOURCE" to the url in the address bar.</i>
           </section>
           <section>
