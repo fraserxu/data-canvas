@@ -54,7 +54,6 @@ var Sparkline = React.createClass({
     var svg = d3.select(this.getDOMNode()).append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
-      .attr('cursor', 'move')
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -62,27 +61,6 @@ var Sparkline = React.createClass({
     var max = formatDate(data[data.length - 1])
     xScale.domain( [min, max] )
     yScale.domain(d3.extent(data.map((item) => item.data[this.props.indicator])))
-
-    var zoom = d3.behavior.zoom()
-      .scaleExtent([1, 1])
-      .x(xScale)
-      .on('zoom', () => {
-        var t = zoom.translate()
-        var tx = t[0]
-        var ty = t[1]
-
-        tx = Math.min(tx, 0)
-        tx = Math.max(tx, width - max)
-        zoom.translate([tx, ty])
-
-        svg.select('.line.gradient')
-          .attr('d', line)
-
-        svg.select('.x.axis')
-          .call(xAxis)
-      })
-
-    svg.call(zoom)
 
     svg.append('linearGradient')
       .attr('id', 'aqi-gradient')
