@@ -24,8 +24,10 @@
   },
   "dependencies": {
     "d3": "^3.5.3",
+    "forecast.io": "0.0.9",
     "moment": "^2.9.0",
     "react": "^0.12.2",
-    "react-dropdown": "^0.1.1"
+    "react-dropdown": "^0.1.1",
+    "twix": "^0.6.2"
   }
 }
