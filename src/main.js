@@ -19,11 +19,16 @@ const App = React.createClass({
     var { cities } = this.state
 
     return (
-      <section className='container'>
-        {Object.keys(cities).map((city) => {
-          return <City key={city} name={city} id={cities[city]} />
-        })}
-      </section>
+      <div className='main'>
+        <header>Data Canvas - Senor your city</header>
+        <section className='wrapper'>
+          <div className='row'>
+            {Object.keys(cities).map((city) => {
+              return <City key={city} name={city} id={cities[city]} />
+            })}
+          </div>
+        </section>
+      </div>
     );
   }
 

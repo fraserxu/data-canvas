@@ -33,7 +33,7 @@ const City = React.createClass({
     if (this.state.data) icon = `http://openweathermap.org/img/w/${this.state.data.weather[0].icon}.png`
 
     return (
-      <section className='city'>
+      <section className='city col-1'>
         {this.props.name}
         <div className='weather'>
           <img src={icon} />
