@@ -49,19 +49,43 @@ html, body {
 
 }
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 1300px) {
 
   .wrapper {
-    max-width: 1000px;
+    max-width: 1300px;
   }
 
 }
 
-header {
+.main > header {
   padding: 30px;
   font: 600 20px/1 'Open Sans', sans-serif;
   text-align: center;
   color: #777;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.city {
+  text-align: center;
+  header {
+    height: 160px;
+    color: whitesmoke;
+    font: 600 14px/1 'Open Sans';
+    position: relative;
+    .title {
+      margin-top: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 2px solid whitesmoke;
+    }
+    .temp {
+      display: block;
+    }
+    .weather {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
 }

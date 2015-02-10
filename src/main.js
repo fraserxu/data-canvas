@@ -20,7 +20,7 @@ const App = React.createClass({
 
     return (
       <div className='main'>
-        <header>Data Canvas - Senor your city</header>
+        <header>Data Canvas - Sense your city</header>
         <section className='wrapper'>
           <div className='row'>
             {Object.keys(cities).map((city) => {
