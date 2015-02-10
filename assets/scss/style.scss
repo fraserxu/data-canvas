@@ -1,0 +1,98 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:600');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #eee;
+  font: 600 12px/1 'Open Sans', sans-serif;
+}
+
+.wrapper {
+  margin: 20px auto;
+}
+
+[class*="col-"] {
+  margin-bottom: 20px;
+  min-height: 30px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+@media all and (min-width: 500px) {
+
+  .wrapper {
+    padding: 0 20px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  [class*="col-"] {
+    margin-right: 20px;
+  }
+
+  [class*="col-"]:last-child {
+    margin-right: 0;
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i}{
+      flex: $i;
+    }
+  }
+
+}
+
+@media all and (min-width: 1300px) {
+
+  .wrapper {
+    max-width: 1300px;
+  }
+
+}
+
+.main > header {
+  padding: 30px;
+  font: 600 20px/1 'Open Sans', sans-serif;
+  text-align: center;
+  color: #777;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.city {
+  text-align: center;
+  header {
+    height: 160px;
+    color: whitesmoke;
+    font: 600 14px/1 'Open Sans';
+    position: relative;
+    opacity: .8;
+    .title {
+      margin-top: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 2px solid whitesmoke;
+    }
+    .temp {
+      display: block;
+    }
+    .weather {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .indicator {
+    margin: 20px;
+  }
+}

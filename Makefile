@@ -1,6 +1,8 @@
 NODE_BIN = node_modules/.bin
 SRC_DIR = src
 DIST_DIR = dist
+SASS_DIR = assets/scss
+NODE_BIN = node_modules/.bin
 
 GITHUB_REPO ?= https://$(token):@github.com/fraserxu/data-canvas-shanghai.git
 
@@ -26,7 +28,14 @@ build:
 
 watch:
 	$(NODE_BIN)/watchify $(SRC_DIR)/main.js -t 6to5ify -o $(DIST_DIR)/main.js -dv & \
+	make watch-css & \
 	http-server .
+
+build-css:
+	$(NODE_BIN)/node-sass $(SASS_DIR)/style.scss -o $(DIST_DIR)/
+
+watch-css:
+	$(NODE_BIN)/watch 'make build-css' $(SASS_DIR)
 
 clean:
 	rm -f $(DIST_DIR)/main.js
