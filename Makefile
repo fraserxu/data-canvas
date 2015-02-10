@@ -25,6 +25,7 @@ install:
 
 build:
 	$(NODE_BIN)/browserify $(SRC_DIR)/main.js -t 6to5ify | $(NODE_BIN)/uglifyjs -mc > $(DIST_DIR)/main.js
+	make build-css
 
 watch:
 	$(NODE_BIN)/watchify $(SRC_DIR)/main.js -t 6to5ify -o $(DIST_DIR)/main.js -dv & \
