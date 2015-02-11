@@ -74,7 +74,9 @@ var API = {
       group_id: "1463451@N25"
     }, (err, result) => {
       if(err) { throw new Error(err); }
-      var firstResult = result.photos.photo[0]
+      var max = result.photos.total > 100 ? 100 : result.photos.total
+      var random = Math.floor(Math.random() * max)
+      var firstResult = result.photos.photo[random]
       cb(`https://farm${firstResult.farm}.staticflickr.com/${firstResult.server}/${firstResult.id}_${firstResult.secret}_n.jpg`)
     })
   }

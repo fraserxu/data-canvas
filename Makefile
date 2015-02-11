@@ -4,7 +4,7 @@ DIST_DIR = dist
 SASS_DIR = assets/scss
 NODE_BIN = node_modules/.bin
 
-GITHUB_REPO ?= https://$(token):@github.com/fraserxu/data-canvas-shanghai.git
+GITHUB_REPO ?= https://$(token):@github.com/fraserxu/data-canvas.git
 
 deploy:
 	git config user.name 'fraserxu on codeship' && \

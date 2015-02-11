@@ -1,5 +1,5 @@
 {
-  "name": "data-canvas-shanghai",
+  "name": "data-canvas",
   "version": "0.0.0",
   "description": "An app to display the data for the data-canvas project",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fraserxu/data-canvas-shanghai.git"
+    "url": "https://github.com/fraserxu/data-canvas.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fraserxu/data-canvas-shanghai/issues"
+    "url": "https://github.com/fraserxu/data-canvas/issues"
   },
-  "homepage": "https://github.com/fraserxu/data-canvas-shanghai",
+  "homepage": "https://github.com/fraserxu/data-canvas",
   "devDependencies": {
     "6to5ify": "^3.1.2",
     "browserify": "^8.1.0",
