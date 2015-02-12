@@ -92,7 +92,14 @@ html, body {
       opacity: 1;
     }
   }
+  .header {
+    padding: 10px;
+    height: 30px;
+    background: #fff;
+  }
   .indicator {
-    margin: 20px;
+    margin: 20px 0;
   }
 }
+
+@import 'chartist';
