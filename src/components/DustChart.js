@@ -7,7 +7,7 @@ const DustChart = React.createClass({
   displayName: 'DustChart',
 
   render() {
-    var dustChart, airData, high, low
+    var dustChart, dustData, high, low
     if (this.props.data) {
       var _dust = this.props.data.data.map((d) => d['dust'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])

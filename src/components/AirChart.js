@@ -9,8 +9,8 @@ const AirChart = React.createClass({
   render() {
     var airChart, airData, high, low
     if (this.props.data) {
-      var _air = this.props.data.map((d) => d['airquality_raw'])
-      var timestamp = this.props.data.map((d) => d['timestamp'])
+      var _air = this.props.data.data.map((d) => d['airquality_raw'])
+      var timestamp = this.props.data.data.map((d) => d['timestamp'])
       high = d3.max(_air)
       low = d3.min(_air)
 
