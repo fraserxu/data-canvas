@@ -1,6 +1,12 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
+
 import api from '../utils/api';
+import AirChart from './AirChart';
+import DustChart from './DustChart';
+import HumidityChart from './HumidityChart';
+import NoiseChart from './NoiseChart';
+import LightChart from './LightChart';
 
 const City = React.createClass({
 
@@ -18,6 +24,7 @@ const City = React.createClass({
 
   fetchData() {
     api.getWeatherByCityID(this.props.id, (data) => {
+      if (!data) return
       var condition = data.weather[0].main || 'clear'
       api.fetchCityData(this.props.name, {}, (sensorData) => {
         api.getFlickrUrl(this.props.name, condition, (url) => {
@@ -34,7 +41,7 @@ const City = React.createClass({
   },
 
   render() {
-    var icon, temperature, aqi, dust, humidity, noise, light
+    var icon, temperature, aqi, dust, humidity, noise, light, headerStyle
     if (this.state.data) icon = `http://openweathermap.org/img/w/${this.state.data.weather[0].icon}.png`
     if (this.state.sensorData) {
       var latest = this.state.sensorData.data[this.state.sensorData.data.length - 1]
@@ -45,170 +52,11 @@ const City = React.createClass({
       noise = parseFloat(latest['sound']).toFixed(2)
       light = parseFloat(latest['light']).toFixed(2)
     }
-    var headerStyle = {
-      backgroundImage: `url(${this.state.flickUrl})`
+    if (this.state.flickUrl) {
+      headerStyle = {
+        backgroundImage: `url(${this.state.flickUrl})`
+      }
     }
-
-    /**
-     * Air Chart
-     */
-    var airChart, airData, high, low
-    if (this.state.sensorData) {
-      var _air = this.state.sensorData.data.map((d) => d['airquality_raw'])
-      var timestamp = this.state.sensorData.data.map((d) => d['timestamp'])
-      high = d3.max(_air)
-      low = d3.min(_air)
-
-      var biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
-        showArea: true,
-        showLine: true,
-        showPoint: false,
-        axisX: {
-          showLabel: false,
-          showGrid: false
-        }
-      }
-
-      airData = {
-        labels: timestamp,
-        series: [
-          _air
-        ]
-      }
-
-      airChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
-    }
-
-    /**
-     * Dust Chart
-     */
-    var dustChart, airData, high, low
-    if (this.state.sensorData) {
-      var _dust = this.state.sensorData.data.map((d) => d['dust'])
-      var timestamp = this.state.sensorData.data.map((d) => d['timestamp'])
-      high = d3.max(_dust)
-      low = d3.min(_dust)
-
-      var biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
-        showArea: true,
-        showLine: true,
-        showPoint: false,
-        axisX: {
-          showLabel: false,
-          showGrid: false
-        }
-      }
-
-      airData = {
-        labels: timestamp,
-        series: [
-          _dust
-        ]
-      }
-
-      dustChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
-    }
-
-    /**
-     * Humidity Chart
-     */
-    var humidityChart, airData, high, low
-    if (this.state.sensorData) {
-      var _humidity = this.state.sensorData.data.map((d) => d['humidity'])
-      var timestamp = this.state.sensorData.data.map((d) => d['timestamp'])
-      high = d3.max(_humidity)
-      low = d3.min(_humidity)
-
-      var biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
-        showArea: true,
-        showLine: true,
-        showPoint: false,
-        axisX: {
-          showLabel: false,
-          showGrid: false
-        }
-      }
-
-      airData = {
-        labels: timestamp,
-        series: [
-          _humidity
-        ]
-      }
-
-      humidityChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
-    }
-
-    /**
-     * Noise Chart
-     */
-    var noiseChart, airData, high, low
-    if (this.state.sensorData) {
-      var _sound = this.state.sensorData.data.map((d) => d['sound'])
-      var timestamp = this.state.sensorData.data.map((d) => d['timestamp'])
-      high = d3.max(_sound)
-      low = d3.min(_sound)
-
-      var biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
-        showArea: true,
-        showLine: true,
-        showPoint: false,
-        axisX: {
-          showLabel: false,
-          showGrid: false
-        }
-      }
-
-      airData = {
-        labels: timestamp,
-        series: [
-          _sound
-        ]
-      }
-
-      noiseChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
-    }
-
-    /**
-     * Light Chart
-     */
-    var lightChart, airData, high, low
-    if (this.state.sensorData) {
-      var _light = this.state.sensorData.data.map((d) => d['light'])
-      var timestamp = this.state.sensorData.data.map((d) => d['timestamp'])
-      high = d3.max(_light)
-      low = d3.min(_light)
-
-      var biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
-        showArea: true,
-        showLine: true,
-        showPoint: false,
-        axisX: {
-          showLabel: false,
-          showGrid: false
-        }
-      }
-
-      airData = {
-        labels: timestamp,
-        series: [
-          _light
-        ]
-      }
-
-      lightChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
-    }
-
 
     return (
       <section className='city col-1'>
@@ -219,26 +67,17 @@ const City = React.createClass({
             <img src={icon} />
           </div>
         </header>
-        <section className='indicator aqi'>
-          AQI: {aqi} mV
-          { airChart }
-        </section>
-        <section className='indicator dust'>
-          Dust: {dust} pcs/238mL
-          { dustChart }
-        </section>
-        <section className='indicator humidity'>
-          Humidity: {humidity} %
-          { humidityChart }
-        </section>
-        <section className='indicator noise'>
-          Noise: {noise} mV
-          { noiseChart }
-        </section>
-        <section className='indicator light'>
-          Light: {light} Lux
-          { lightChart }
-        </section>
+
+        <AirChart data={this.state.sensorData} aqi={aqi} />
+
+        <DustChart data={this.state.sensorData} dust={dust} />
+
+        <HumidityChart data={this.state.sensorData} humidity={humidity} />
+
+        <NoiseChart data={this.state.sensorData} noise={noise} />
+
+        <LightChart data={this.state.sensorData} light={light} />
+
       </section>
     );
   }

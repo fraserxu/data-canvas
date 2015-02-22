@@ -16,7 +16,7 @@ const App = React.createClass({
   },
 
   render() {
-    var { cities } = this.state
+    const { cities } = this.state
 
     return (
       <div className='main'>
