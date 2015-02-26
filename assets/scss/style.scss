@@ -64,6 +64,34 @@ html, body {
   color: #777;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  .title {
+    display: inline;
+  }
+  .control {
+    display: inline;
+    font-size: 14px;
+    position: absolute;
+    line-height: 27px;
+    top: 27px;
+    right: 15px;
+    .label {
+      font-size: 12px;
+    }
+  }
+  .options {
+    display: inline-block;
+    margin-left: 5px;
+    li{
+      display: inline;
+      list-style: none;
+      padding-right: 5px;
+      cursor: pointer;
+      &.active {
+        color: #000;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .city {

@@ -1,5 +1,4 @@
 import React from 'react';
-import ChartistGraph from 'react-chartist';
 
 import api from '../utils/api';
 import AirChart from './AirChart';
@@ -34,7 +33,6 @@ const City = React.createClass({
             flickUrl: url
           })
         })
-
       })
 
     })

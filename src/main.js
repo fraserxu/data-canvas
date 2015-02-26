@@ -11,20 +11,37 @@ const App = React.createClass({
 
   getInitialState() {
     return {
-      cities: cities
+      cities: cities,
+      dataRange: 'day'
     };
   },
 
+  setRange(value) {
+    this.setState({
+      dataRange: value
+    })
+  },
+
   render() {
-    const { cities } = this.state
+    const { dataRange, cities } = this.state
 
     return (
       <div className='main'>
-        <header>Data Canvas - Sense your city</header>
+        <header>
+          <div className='title'>Data Canvas - Sense your city</div>
+          <div className='control'>
+            <span className='label'>View by:</span>
+            <ul className='options'>
+              <li className={this.state.dataRange == 'day' ? 'active' : ''} onClick={this.setRange.bind(this, 'day')}>DAY</li>
+              <li className={this.state.dataRange == 'week' ? 'active' : ''} onClick={this.setRange.bind(this, 'week')}>WEEK</li>
+              <li className={this.state.dataRange == 'month' ? 'active' : ''} onClick={this.setRange.bind(this, 'month')}>MONTH</li>
+            </ul>
+          </div>
+        </header>
         <section className='wrapper'>
           <div className='row'>
             {Object.keys(cities).map((city) => {
-              return <City key={city} name={city} id={cities[city]} />
+              return <City key={city} name={city} id={cities[city]} dataRange={dataRange} />
             })}
           </div>
         </section>
