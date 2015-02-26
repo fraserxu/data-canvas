@@ -102,4 +102,12 @@ html, body {
   }
 }
 
+footer {
+  text-align: center;
+  margin: 20px auto;
+  p {
+    margin-bottom: 10px;
+  }
+}
+
 @import 'chartist';

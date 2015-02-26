@@ -28,6 +28,11 @@ const App = React.createClass({
             })}
           </div>
         </section>
+        <footer>
+          <p>Image data from Yahoo flickr weather project</p>
+          <p>Weather data and icon from openweathermap</p>
+          Made with &lt;3 by <a href='http://fraserxu.me'>Fraser Xu</a>
+        </footer>
       </div>
     );
   }
