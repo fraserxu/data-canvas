@@ -18,7 +18,7 @@ const NoiseChart = React.createClass({
         high: high || 0,
         low: low || 0,
         showArea: true,
-        showLine: true,
+        showLine: false,
         showPoint: false,
         axisX: {
           showLabel: false,
