@@ -20,13 +20,13 @@ var API = {
     let from, resolution
     if (params.dataRange == 'day') {
       from = dateUtils.toISO(dateUtils.getPreviousDay(Date.now()))
-      resolution = '20m'
+      resolution = '3h'
     } else if (params.dataRange == 'week') {
       from = dateUtils.toISO(dateUtils.getPreviousWeek(Date.now()))
-      resolution = '1h'
+      resolution = '24h'
     } else if (params.dataRange == 'month') {
       from = dateUtils.toISO(dateUtils.getPreviousMonth(Date.now()))
-      resolution = '24h'
+      resolution = '96h'
     }
 
     const ops = {

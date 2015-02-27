@@ -1,6 +1,7 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
 import d3 from 'd3';
+import moment from 'moment';
 
 const HumidityChart = React.createClass({
 
@@ -14,6 +15,15 @@ const HumidityChart = React.createClass({
       high = d3.max(_humidity)
       low = d3.min(_humidity)
 
+      let _labels = timestamp
+      if (this.props.dataRange == 'day') {
+        _labels = timestamp.map((d) => moment(d).format('HH'))
+      } else if (this.props.dataRange == 'week') {
+        _labels = timestamp.map((d) => moment(d).format('dd'))
+      } else if (this.props.dataRange == 'month') {
+        _labels = timestamp.map((d) => moment(d).format('DD'))
+      }
+
       const biPolarLineChartOptions = {
         high: high || 0,
         low: low || 0,
@@ -21,13 +31,13 @@ const HumidityChart = React.createClass({
         showLine: false,
         showPoint: false,
         axisX: {
-          showLabel: false,
+          showLabel: true,
           showGrid: false
         }
       }
 
       humidityData = {
-        labels: timestamp,
+        labels: _labels,
         series: [
           _humidity
         ]

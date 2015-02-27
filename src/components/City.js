@@ -80,15 +80,15 @@ const City = React.createClass({
           </div>
         </header>
 
-        <AirChart data={this.state.sensorData} aqi={aqi} />
+        <AirChart data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
 
-        <DustChart data={this.state.sensorData} dust={dust} />
+        <DustChart data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
 
-        <HumidityChart data={this.state.sensorData} humidity={humidity} />
+        <HumidityChart data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
 
-        <NoiseChart data={this.state.sensorData} noise={noise} />
+        <NoiseChart data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
 
-        <LightChart data={this.state.sensorData} light={light} />
+        <LightChart data={this.state.sensorData} light={light} dataRange={this.props.dataRange} />
 
       </section>
     );
