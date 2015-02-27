@@ -3,7 +3,7 @@ import React from 'react';
 import City from './components/City';
 import cities from './data/cities.json';
 
-window.React = React
+window.React = React;
 
 const App = React.createClass({
 
@@ -55,6 +55,5 @@ const App = React.createClass({
   }
 
 });
-
 
 React.render(<App />, document.body);

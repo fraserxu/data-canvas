@@ -13,28 +13,42 @@ const City = React.createClass({
 
   getInitialState() {
     return {
-      data: null
+      data: null,
+      flickUrl: null,
+      sensorData: null
     };
   },
 
   componentWillMount() {
-    this.fetchData()
+    this.fetchData(this.props)
   },
 
-  fetchData() {
-    api.getWeatherByCityID(this.props.id, (data) => {
-      if (!data) return
-      var condition = data.weather[0].main || 'clear'
-      api.fetchCityData(this.props.name, {}, (sensorData) => {
-        api.getFlickrUrl(this.props.name, condition, (url) => {
+  componentWillReceiveProps(nextProps) {
+    this.fetchData(nextProps)
+  },
+
+  fetchData(props) {
+    if (!this.state.data || !this.state.flickUrl) {
+      api.getWeatherByCityID(props.id, (data) => {
+        if (!data) return
+
+        this.setState({ data: data })
+
+        const condition = data.weather[0].main || 'clear'
+        api.getFlickrUrl(props.name, condition, (url) => {
           this.setState({
-            data: data,
-            sensorData: sensorData,
             flickUrl: url
           })
         })
       })
+    }
 
+    api.fetchCityData(props.name, {
+      dataRange: props.dataRange || 'day'
+    }, (sensorData) => {
+      this.setState({
+        sensorData: sensorData
+      })
     })
   },
 

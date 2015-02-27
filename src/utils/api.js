@@ -17,17 +17,27 @@ var API = {
   fetchCityData(city, params, cb) {
     if (!city) throw new Error('city name is required')
 
-    var ops = {
+    let from, resolution
+    if (params.dataRange == 'day') {
+      from = dateUtils.toISO(dateUtils.getPreviousDay(Date.now()))
+      resolution = '20m'
+    } else if (params.dataRange == 'week') {
+      from = dateUtils.toISO(dateUtils.getPreviousWeek(Date.now()))
+      resolution = '1h'
+    } else if (params.dataRange == 'month') {
+      from = dateUtils.toISO(dateUtils.getPreviousMonth(Date.now()))
+      resolution = '24h'
+    }
+
+    const ops = {
       fields: params.fields || 'temperature,light,airquality_raw,sound,humidity,dust',
-      from: params.from || dateUtils.toISO(dateUtils.getPreviousDay(Date.now(), 24)),
-      before: params.to || dateUtils.toISO(Date.now()),
-      resolution: params.resolution || '1h',
+      from: from || dateUtils.toISO(dateUtils.getPreviousDay(Date.now())),
+      before: dateUtils.toISO(Date.now()),
+      resolution: resolution || '1h',
       'over.city': city
     }
 
-    var url = `${API_URL}/aggregations?${qs.stringify(ops)}`
-
-    d3.json(url, (res) => {
+    d3.json(`${API_URL}/aggregations?${qs.stringify(ops)}`, (res) => {
       cb(res)
     })
   },
