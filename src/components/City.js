@@ -90,13 +90,13 @@ const City = React.createClass({
 
         { loading ? <Loading type='bubbles' color='#ccc' /> : null}
 
-        <TemperatureChart data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
-
         <AirChart data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
 
         <DustChart data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
 
         <HumidityChart data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
+
+        <TemperatureChart data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
 
         <NoiseChart data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
 
