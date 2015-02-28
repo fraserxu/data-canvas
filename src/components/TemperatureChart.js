@@ -3,14 +3,14 @@ import ChartistGraph from 'react-chartist';
 import d3 from 'd3';
 import moment from 'moment';
 
-const AirChart = React.createClass({
+const TemperatureChart = React.createClass({
 
-  displayName: 'AirChart',
+  displayName: 'TemperatureChart',
 
   render() {
-    var airChart, airData
+    var temperatureChart, temeratureData
     if (this.props.data) {
-      var _air = this.props.data.data.map((d) => d['airquality_raw'])
+      var _air = this.props.data.data.map((d) => d['temperature'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])
       // high = d3.max(_air)
       // low = d3.min(_air)
@@ -25,8 +25,8 @@ const AirChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: 150,
-        low: 0,
+        high: 50,
+        low: -10,
         showArea: true,
         showLine: false,
         showPoint: false,
@@ -36,24 +36,24 @@ const AirChart = React.createClass({
         }
       }
 
-      airData = {
+      temeratureData = {
         labels: _labels,
         series: [
           _air
         ]
       }
 
-      airChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
+      temperatureChart = <ChartistGraph data={temeratureData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
     return (
-      <section className='indicator aqi'>
-        AQI: {this.props.aqi} mV
-        { airChart }
+      <section className='indicator temperature'>
+        Temperature: {this.props.temperature} °C
+        { temperatureChart }
       </section>
     );
   }
 
 });
 
-export default AirChart;
+export default TemperatureChart;

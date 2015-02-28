@@ -25,8 +25,8 @@ const NoiseChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
+        high: 2000,
+        low: 0,
         showArea: true,
         showLine: false,
         showPoint: false,

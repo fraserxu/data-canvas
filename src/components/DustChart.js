@@ -12,8 +12,8 @@ const DustChart = React.createClass({
     if (this.props.data) {
       var _dust = this.props.data.data.map((d) => d['dust'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      high = d3.max(_dust)
-      low = d3.min(_dust)
+      // high = d3.max(_dust)
+      // low = d3.min(_dust)
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -25,8 +25,8 @@ const DustChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: high || 0,
-        low: low || 0,
+        high: 3000,
+        low: 0,
         showArea: true,
         showLine: false,
         showPoint: false,

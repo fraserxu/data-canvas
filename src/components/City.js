@@ -6,6 +6,8 @@ import DustChart from './DustChart';
 import HumidityChart from './HumidityChart';
 import NoiseChart from './NoiseChart';
 import LightChart from './LightChart';
+import TemperatureChart from './TemperatureChart';
+import Loading from './Loading';
 
 const City = React.createClass({
 
@@ -15,15 +17,18 @@ const City = React.createClass({
     return {
       data: null,
       flickUrl: null,
-      sensorData: null
+      sensorData: null,
+      loading: true
     };
   },
 
   componentWillMount() {
+    if (!this.state.loading) this.setState({loading: true})
     this.fetchData(this.props)
   },
 
   componentWillReceiveProps(nextProps) {
+    if (!this.state.loading) this.setState({loading: true})
     this.fetchData(nextProps)
   },
 
@@ -47,7 +52,8 @@ const City = React.createClass({
       dataRange: props.dataRange || 'month'
     }, (sensorData) => {
       this.setState({
-        sensorData: sensorData
+        sensorData: sensorData,
+        loading: false
       })
     })
   },
@@ -70,6 +76,8 @@ const City = React.createClass({
       }
     }
 
+    const { loading } = this.state
+
     return (
       <section className='city col-1'>
         <header style={headerStyle}>
@@ -79,6 +87,10 @@ const City = React.createClass({
             <img src={icon} />
           </div>
         </header>
+
+        { loading ? <Loading type='bubbles' color='#ccc' /> : null}
+
+        <TemperatureChart data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
 
         <AirChart data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
 
