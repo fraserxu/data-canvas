@@ -127,6 +127,10 @@ html, body {
   }
   .indicator {
     margin: 20px 0;
+    .help {
+      cursor: pointer;
+      color: steelblue;
+    }
   }
 }
 
@@ -139,3 +143,4 @@ footer {
 }
 
 @import 'chartist';
+@import 'hint';

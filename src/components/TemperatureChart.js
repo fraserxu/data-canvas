@@ -46,9 +46,12 @@ const TemperatureChart = React.createClass({
       temperatureChart = <ChartistGraph data={temeratureData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+    const description = `Unit: degree celsius.`
+
     return (
       <section className='indicator temperature'>
-        Temperature: {this.props.temperature} °C
+        Temperature (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint={`${description}`}>?</span>) : {this.props.temperature} °C
         { temperatureChart }
       </section>
     );

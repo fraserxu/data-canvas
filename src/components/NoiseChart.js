@@ -46,9 +46,12 @@ const NoiseChart = React.createClass({
       noiseChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+    const description = `Measures the raw output voltage of the sensor based on noise in the nearby environment. To convert to decibel, use dB = 0.0158x + 49.184. `
+
     return (
       <section className='indicator noise'>
-        Noise: {this.props.noise} mV
+        Noise (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint={`${description}`}>?</span>) : {this.props.noise} mV
         { noiseChart }
       </section>
     );

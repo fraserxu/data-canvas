@@ -46,9 +46,12 @@ const HumidityChart = React.createClass({
       humidityChart = <ChartistGraph data={humidityData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+    const description = `relative humidity is expressed as percentage and measures the absolute humidity relative to the maximum for that temperature. This sensor can detect RH from 5 to 99%. `
+
     return (
       <section className='indicator humidity'>
-        Humidity: {this.props.humidity} %
+        Humidity (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint={`${description}`}>?</span>) : {this.props.humidity} %
         { humidityChart }
       </section>
     );

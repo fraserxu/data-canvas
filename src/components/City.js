@@ -90,17 +90,17 @@ const City = React.createClass({
 
         { loading ? <Loading type='bubbles' color='#ccc' /> : null}
 
-        <AirChart data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
+        <AirChart last={this.props.last} data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
 
-        <DustChart data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
+        <DustChart last={this.props.last} data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
 
-        <HumidityChart data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
+        <HumidityChart last={this.props.last} data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
 
-        <TemperatureChart data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
+        <TemperatureChart last={this.props.last} data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
 
-        <NoiseChart data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
+        <NoiseChart last={this.props.last} data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
 
-        <LightChart data={this.state.sensorData} light={light} dataRange={this.props.dataRange} />
+        <LightChart last={this.props.last} data={this.state.sensorData} light={light} dataRange={this.props.dataRange} />
 
       </section>
     );

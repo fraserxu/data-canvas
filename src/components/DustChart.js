@@ -46,9 +46,12 @@ const DustChart = React.createClass({
       dustChart = <ChartistGraph data={dustData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+    const description = `Measures the concentration of PM above 1 micrometer in size, as opposed to weight of PM. This sensor has a detection range of of [0-28’000 pcs/liter].`
+
     return (
       <section className='indicator dust'>
-        Dust: {this.props.dust} pcs/238mL
+        Dust (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint={`${description}`}>?</span>) : {this.props.dust} pcs/238mL
         { dustChart }
       </section>
     );

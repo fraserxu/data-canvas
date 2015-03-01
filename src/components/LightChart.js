@@ -46,9 +46,12 @@ const LightChart = React.createClass({
       lightChart = <ChartistGraph data={lightData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+    const description = `The light sensor measures digital light, or illuminance. `
+
     return (
       <section className='indicator light'>
-        Light: {this.props.light} Lux
+        Light (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint={`${description}`}>?</span>) : {this.props.light} Lux
         { lightChart }
       </section>
     );

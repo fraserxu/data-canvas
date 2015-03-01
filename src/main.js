@@ -40,8 +40,8 @@ const App = React.createClass({
         </header>
         <section className='wrapper'>
           <div className='row'>
-            {Object.keys(cities).map((city) => {
-              return <City key={city} name={city} id={cities[city]} dataRange={dataRange} />
+            {Object.keys(cities).map((city, index) => {
+              return <City key={city} name={city} last={(Object.keys(cities).length - 1) === index} id={cities[city]} dataRange={dataRange} />
             })}
           </div>
         </section>

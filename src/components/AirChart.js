@@ -46,9 +46,11 @@ const AirChart = React.createClass({
       airChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
     }
 
+    const isLast = this.props.last
+
     return (
       <section className='indicator aqi'>
-        AQI: {this.props.aqi} mV
+        AQI (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint='Measures when harmful target gases (second hand smoke, carbon monoxide, alcohol etc.) are triggered and expresses their combined concentration in raw voltage. Higher output is associated with increased pollutant gases. Peaks may happen around rush hour, when a bus or truck drives by, or during construction.'>?</span>) : {this.props.aqi} mV
         { airChart }
       </section>
     );
