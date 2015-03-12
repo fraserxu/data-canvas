@@ -12,7 +12,7 @@ const App = React.createClass({
   getInitialState() {
     return {
       cities: cities,
-      dataRange: 'month'
+      dataRange: 'day'
     };
   },
 

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/fraserxu/data-canvas",
   "devDependencies": {
     "6to5ify": "^3.1.2",
+    "autoprefixer": "^5.1.0",
     "browserify": "^8.1.0",
     "node-sass": "^2.0.0-beta",
     "uglify-js": "^2.4.16",

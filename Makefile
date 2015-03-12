@@ -34,6 +34,7 @@ watch:
 
 build-css:
 	$(NODE_BIN)/node-sass $(SASS_DIR)/style.scss -o $(DIST_DIR)/
+	$(NODE_BIN)/autoprefixer dist/*.css
 
 watch-css:
 	$(NODE_BIN)/watch 'make build-css' $(SASS_DIR)
@@ -41,4 +42,12 @@ watch-css:
 clean:
 	rm -f $(DIST_DIR)/main.js
 
-.PHONY: deploy install build watch clean
+surge:
+	rm -rf surge
+	mkdir -p surge
+	make build
+	cp index.html ./surge
+	cp -r dist ./surge
+	surge surge
+
+.PHONY: deploy install build watch clean surge

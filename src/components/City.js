@@ -49,7 +49,7 @@ const City = React.createClass({
     }
 
     api.fetchCityData(props.name, {
-      dataRange: props.dataRange || 'month'
+      dataRange: props.dataRange || 'week'
     }, (sensorData) => {
       this.setState({
         sensorData: sensorData,
