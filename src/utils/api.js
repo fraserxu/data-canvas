@@ -1,5 +1,5 @@
-var d3 = require('d3')
 var qs = require('querystring')
+var xhr = require('xhr')
 
 var Flickr = require('./flickrapi')
 var dateUtils = require('./dateUtils')
@@ -26,7 +26,7 @@ var API = {
       resolution = '24h'
     } else if (params.dataRange == 'month') {
       from = dateUtils.toISO(dateUtils.getPreviousMonth(Date.now()))
-      resolution = '96h'
+      resolution = '24h'
     }
 
     const ops = {
@@ -37,8 +37,13 @@ var API = {
       'over.city': city
     }
 
-    d3.json(`${API_URL}/aggregations?${qs.stringify(ops)}`, (res) => {
-      cb(res)
+    // d3.json(`${API_URL}/aggregations?${qs.stringify(ops)}`, (res) => {
+    //   cb(res)
+    // })
+    xhr({
+      url: `${API_URL}/aggregations?${qs.stringify(ops)}`
+    }, (err, resp, body) => {
+      cb(JSON.parse(body))
     })
   },
 
@@ -49,12 +54,17 @@ var API = {
   },
 
   getWeatherByCityID(id, cb) {
-    d3.json(`http://api.openweathermap.org/data/2.5/weather?id=${id}`, (data) => {
-      cb(data)
+    // d3.json(`http://api.openweathermap.org/data/2.5/weather?id=${id}`, (data) => {
+    //   cb(data)
+    // })
+    xhr({
+      url: `http://api.openweathermap.org/data/2.5/weather?id=${id}`
+    }, (err, resp, body) => {
+      cb(JSON.parse(body))
     })
   },
 
-  getFlickrUrl(city, condition, cb) {
+  getFlickrUrl(city, condition, size, cb) {
     flickr.photos.search({
       text: `${city} ${condition}`,
       group_id: "1463451@N25"
@@ -63,11 +73,9 @@ var API = {
       var max = result.photos.total > 100 ? 100 : result.photos.total
       var random = Math.floor(Math.random() * max)
       var firstResult = result.photos.photo[random]
-      cb(`https://farm${firstResult.farm}.staticflickr.com/${firstResult.server}/${firstResult.id}_${firstResult.secret}_n.jpg`)
+      cb(`https://farm${firstResult.farm}.staticflickr.com/${firstResult.server}/${firstResult.id}_${firstResult.secret}_${size}.jpg`)
     })
   }
 }
-
-window.API = API
 
 module.exports = API;

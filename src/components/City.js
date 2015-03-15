@@ -36,13 +36,13 @@ const City = React.createClass({
     if (!this.state.data || !this.state.flickUrl) {
       api.getWeatherByCityID(props.id, (data) => {
         if (!data) return
-
-        this.setState({ data: data })
+        let size = this.props.showDetail ? 'b' : 'n'
 
         const condition = data.weather[0].main || 'clear'
-        api.getFlickrUrl(props.name, condition, (url) => {
+        api.getFlickrUrl(props.name, condition, size, (url) => {
           this.setState({
-            flickUrl: url
+            flickUrl: url,
+            data: data
           })
         })
       })
@@ -59,7 +59,7 @@ const City = React.createClass({
   },
 
   render() {
-    var icon, temperature, aqi, dust, humidity, noise, light, headerStyle
+    let icon, temperature, aqi, dust, humidity, noise, light, headerStyle
     if (this.state.data) icon = `http://openweathermap.org/img/w/${this.state.data.weather[0].icon}.png`
     if (this.state.sensorData) {
       var latest = this.state.sensorData.data[this.state.sensorData.data.length - 1]
@@ -80,7 +80,7 @@ const City = React.createClass({
 
     return (
       <section className='city col-1'>
-        <header style={headerStyle}>
+        <header style={headerStyle} name={this.props.name} onClick={this.props.setCity ? this.props.setCity : null}>
           <span className='title'>{this.props.name}</span>
           <span className='temp'>{temperature} ℃</span>
           <div className='weather'>
@@ -90,17 +90,22 @@ const City = React.createClass({
 
         { loading ? <Loading type='bubbles' color='#ccc' /> : null}
 
-        <AirChart last={this.props.last} data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
+        { !loading &&
+          <div className='charts-container'>
+            <AirChart last={this.props.last} data={this.state.sensorData} aqi={aqi} dataRange={this.props.dataRange} />
 
-        <DustChart last={this.props.last} data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
+            <DustChart last={this.props.last} data={this.state.sensorData} dust={dust} dataRange={this.props.dataRange} />
 
-        <HumidityChart last={this.props.last} data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
+            <HumidityChart last={this.props.last} data={this.state.sensorData} humidity={humidity} dataRange={this.props.dataRange} />
 
-        <TemperatureChart last={this.props.last} data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
+            <TemperatureChart last={this.props.last} data={this.state.sensorData} temperature={temperature} dataRange={this.props.dataRange} />
 
-        <NoiseChart last={this.props.last} data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
+            <NoiseChart last={this.props.last} data={this.state.sensorData} noise={noise} dataRange={this.props.dataRange} />
 
-        <LightChart last={this.props.last} data={this.state.sensorData} light={light} dataRange={this.props.dataRange} />
+            <LightChart last={this.props.last} data={this.state.sensorData} light={light} dataRange={this.props.dataRange} />
+
+          </div>
+        }
 
       </section>
     );

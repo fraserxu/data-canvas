@@ -12,8 +12,8 @@ const HumidityChart = React.createClass({
     if (this.props.data) {
       var _humidity = this.props.data.data.map((d) => d['humidity'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      high = d3.max(_humidity)
-      low = d3.min(_humidity)
+      var high = d3.max(_humidity)
+      var low = d3.min(_humidity)
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -25,8 +25,8 @@ const HumidityChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: 100,
-        low: 0,
+        high: high || 100,
+        low: low || 0,
         showArea: true,
         showLine: false,
         showPoint: false,

@@ -1,18 +1,23 @@
 import React from 'react';
+import { addons } from 'react/addons';
 
 import City from './components/City';
 import cities from './data/cities.json';
 
-window.React = React;
+const { PureRenderMixin } = addons;
 
 const App = React.createClass({
 
   displayName: 'App',
 
+  mixins: [PureRenderMixin],
+
   getInitialState() {
     return {
       cities: cities,
-      dataRange: 'day'
+      dataRange: 'day',
+      type: 'overall',
+      selectedCity: 'Shanghai'
     };
   },
 
@@ -22,14 +27,33 @@ const App = React.createClass({
     })
   },
 
+  setType(value) {
+    this.setState({
+      type: value
+    })
+  },
+
+  setCity(value) {
+    this.setState({
+      type: 'specific',
+      selectedCity: value.target.getAttribute('name')
+    })
+  },
+
   render() {
     const { dataRange, cities } = this.state
 
     return (
       <div className='main'>
         <header>
+          <div className='control left'>
+            <ul className='options'>
+              <li className={this.state.type == 'overall' ? 'active' : ''} onClick={this.setType.bind(this, 'overall')}>Overall</li>
+              <li className={this.state.type == 'specific' ? 'active' : ''} onClick={this.setType.bind(this, 'specific')}>Specific</li>
+            </ul>
+          </div>
           <div className='title'>Data Canvas - Sense your city</div>
-          <div className='control'>
+          <div className='control right'>
             <span className='label'>View by:</span>
             <ul className='options'>
               <li className={this.state.dataRange == 'day' ? 'active' : ''} onClick={this.setRange.bind(this, 'day')}>DAY</li>
@@ -39,11 +63,18 @@ const App = React.createClass({
           </div>
         </header>
         <section className='wrapper'>
-          <div className='row'>
-            {Object.keys(cities).map((city, index) => {
-              return <City key={city} name={city} last={(Object.keys(cities).length - 1) === index} id={cities[city]} dataRange={dataRange} />
-            })}
-          </div>
+          { this.state.type === 'overall' &&
+            <div className='row'>
+              {Object.keys(cities).map((city, index) => {
+                return <City key={city} setCity={this.setCity} name={city} last={(Object.keys(cities).length - 1) === index} id={cities[city]} dataRange={dataRange} />
+              })}
+            </div>
+          }
+          { this.state.type === 'specific' &&
+            <div className='row'>
+              <City name={this.state.selectedCity} id={cities[this.state.selectedCity]} dataRange={dataRange} />
+            </div>
+          }
         </section>
         <footer>
           <p>Image data from Yahoo flickr weather project</p>
@@ -57,3 +88,7 @@ const App = React.createClass({
 });
 
 React.render(<App />, document.body);
+
+// dev
+window.React = React;
+

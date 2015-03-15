@@ -73,7 +73,12 @@ html, body {
     position: absolute;
     line-height: 27px;
     top: 27px;
-    right: 15px;
+    &.right {
+      right: 15px;
+    }
+    &.left {
+      left: 27px;
+    }
     .label {
       font-size: 12px;
     }
@@ -96,12 +101,16 @@ html, body {
 
 .city {
   text-align: center;
+  .charts-container {
+    margin-top: 20px;
+  }
   header {
     height: 160px;
     color: whitesmoke;
     font: 600 14px/1 'Open Sans';
     position: relative;
     opacity: .8;
+    cursor: 'pointer';
     .title {
       margin-top: 40px;
       height: 40px;
@@ -142,5 +151,6 @@ footer {
   }
 }
 
+@import 'radarchart';
 @import 'chartist';
 @import 'hint';

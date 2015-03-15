@@ -12,8 +12,8 @@ const AirChart = React.createClass({
     if (this.props.data) {
       var _air = this.props.data.data.map((d) => d['airquality_raw'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      // high = d3.max(_air)
-      // low = d3.min(_air)
+      var high = d3.max(_air)
+      var low = d3.min(_air)
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -25,8 +25,8 @@ const AirChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: 150,
-        low: 0,
+        high: high || 150,
+        low: low || 0,
         showArea: true,
         showLine: false,
         showPoint: false,

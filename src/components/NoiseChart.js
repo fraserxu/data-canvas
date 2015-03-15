@@ -12,8 +12,8 @@ const NoiseChart = React.createClass({
     if (this.props.data) {
       var _sound = this.props.data.data.map((d) => d['sound'])
       var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      high = d3.max(_sound)
-      low = d3.min(_sound)
+      var high = d3.max(_sound)
+      var low = d3.min(_sound)
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -25,8 +25,8 @@ const NoiseChart = React.createClass({
       }
 
       const biPolarLineChartOptions = {
-        high: 2000,
-        low: 0,
+        high: high || 2000,
+        low: low || 0,
         showArea: true,
         showLine: false,
         showPoint: false,
