@@ -70,9 +70,14 @@ const City = React.createClass({
       noise = parseFloat(latest['sound']).toFixed(2)
       light = parseFloat(latest['light']).toFixed(2)
     }
-    if (this.state.flickUrl) {
+    if (this.props.type === 'overall' && this.state.flickUrl) {
       headerStyle = {
         backgroundImage: `url(${this.state.flickUrl})`
+      }
+    } else {
+      headerStyle = {
+        height: '60px',
+        color: '#000'
       }
     }
 

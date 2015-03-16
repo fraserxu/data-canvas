@@ -66,13 +66,13 @@ const App = React.createClass({
           { this.state.type === 'overall' &&
             <div className='row'>
               {Object.keys(cities).map((city, index) => {
-                return <City key={city} setCity={this.setCity} name={city} last={(Object.keys(cities).length - 1) === index} id={cities[city]} dataRange={dataRange} />
+                return <City type={'overall'} key={city} setCity={this.setCity} name={city} last={(Object.keys(cities).length - 1) === index} id={cities[city]} dataRange={dataRange} />
               })}
             </div>
           }
           { this.state.type === 'specific' &&
             <div className='row'>
-              <City name={this.state.selectedCity} id={cities[this.state.selectedCity]} dataRange={dataRange} />
+              <City type={'specific'} name={this.state.selectedCity} id={cities[this.state.selectedCity]} dataRange={dataRange} />
             </div>
           }
         </section>
