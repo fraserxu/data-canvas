@@ -8,12 +8,22 @@ const AirChart = React.createClass({
   displayName: 'AirChart',
 
   render() {
-    var airChart, airData
+    let airChart, airData, _air, timestamp, high, low;
     if (this.props.data) {
-      var _air = this.props.data.data.map((d) => d['airquality_raw'])
-      var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      var high = d3.max(_air)
-      var low = d3.min(_air)
+      if (!this.props.multiple) {
+        _air = this.props.data.data.map((d) => d['airquality_raw'])
+        timestamp = this.props.data.data.map((d) => d['timestamp'])
+        high = d3.max(_air)
+        low = d3.min(_air)
+        _air = [ _air ]
+      } else {
+        _air = this.props.data.map((d) => {
+          return d.data.map((_d) => _d['airquality_raw'])
+        })
+        timestamp = this.props.data[0].data.map((d) => d['timestamp'])
+        high = d3.max(_air.map((air) => d3.max(air)))
+        low = d3.min(_air.map((air) => d3.min(air)))
+      }
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -38,9 +48,7 @@ const AirChart = React.createClass({
 
       airData = {
         labels: _labels,
-        series: [
-          _air
-        ]
+        series: _air
       }
 
       airChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />
@@ -50,7 +58,7 @@ const AirChart = React.createClass({
 
     return (
       <section className='indicator aqi'>
-        AQI (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint='Measures when harmful target gases (second hand smoke, carbon monoxide, alcohol etc.) are triggered and expresses their combined concentration in raw voltage. Higher output is associated with increased pollutant gases. Peaks may happen around rush hour, when a bus or truck drives by, or during construction.'>?</span>) : {this.props.aqi} mV
+        Pollution (<span className={`help hint--${isLast ? 'left' : 'bottom'}`} data-hint='Measures when harmful target gases (second hand smoke, carbon monoxide, alcohol etc.) are triggered and expresses their combined concentration in raw voltage. Higher output is associated with increased pollutant gases. Peaks may happen around rush hour, when a bus or truck drives by, or during construction.'>?</span>) : {this.props.aqi} mV
         { airChart }
       </section>
     );

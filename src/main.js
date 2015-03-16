@@ -1,23 +1,25 @@
 import React from 'react';
-import { addons } from 'react/addons';
+// import { addons } from 'react/addons';
 
 import City from './components/City';
+import ComparedCities from './components/ComparedCities';
 import cities from './data/cities.json';
 
-const { PureRenderMixin } = addons;
+// const { PureRenderMixin } = addons;
 
 const App = React.createClass({
 
   displayName: 'App',
 
-  mixins: [PureRenderMixin],
+  // mixins: [PureRenderMixin],
 
   getInitialState() {
     return {
       cities: cities,
       dataRange: 'day',
       type: 'overall',
-      selectedCity: 'Shanghai'
+      selectedCity: 'Shanghai',
+      comparedCities: ['Shanghai']
     };
   },
 
@@ -40,8 +42,21 @@ const App = React.createClass({
     })
   },
 
+  setSelectedCity(value) {
+    let { comparedCities } = this.state;
+    if (comparedCities.indexOf(value) >= 0) {
+      comparedCities.splice(comparedCities.indexOf(value), 1);
+    } else {
+      comparedCities.push(value);
+    }
+    console.log('comparedCities', comparedCities);
+    this.setState({
+      comparedCities: comparedCities
+    });
+  },
+
   render() {
-    const { dataRange, cities } = this.state
+    let { dataRange, cities, comparedCities } = this.state
 
     return (
       <div className='main'>
@@ -50,6 +65,7 @@ const App = React.createClass({
             <ul className='options'>
               <li className={this.state.type == 'overall' ? 'active' : ''} onClick={this.setType.bind(this, 'overall')}>Overall</li>
               <li className={this.state.type == 'specific' ? 'active' : ''} onClick={this.setType.bind(this, 'specific')}>Specific</li>
+              <li className={this.state.type == 'compare' ? 'active' : ''} onClick={this.setType.bind(this, 'compare')}>Compare</li>
             </ul>
           </div>
           <div className='title'>Data Canvas - Sense your city</div>
@@ -73,6 +89,22 @@ const App = React.createClass({
           { this.state.type === 'specific' &&
             <div className='row'>
               <City type={'specific'} name={this.state.selectedCity} id={cities[this.state.selectedCity]} dataRange={dataRange} />
+            </div>
+          }
+          { this.state.type === 'compare' &&
+            <div>
+              <div className='selector'>
+                <ul className='cities'>
+                  {Object.keys(cities).map((city, index) => {
+                    let selected = (comparedCities.indexOf(city) >= 0) ? 'selected' : '';
+                    return <li className={selected} onClick={this.setSelectedCity.bind(this, city)} key={index}>{city}</li>
+                  })}
+                </ul>
+              </div>
+
+              <div className='row'>
+                <ComparedCities type='compare' cities={comparedCities} dataRange={dataRange} />
+              </div>
             </div>
           }
         </section>

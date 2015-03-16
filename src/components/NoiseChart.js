@@ -8,12 +8,22 @@ const NoiseChart = React.createClass({
   displayName: 'NoiseChart',
 
   render() {
-    var noiseChart, airData, high, low
+    var noiseChart, airData, _sound, timestamp, high, low;
     if (this.props.data) {
-      var _sound = this.props.data.data.map((d) => d['sound'])
-      var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      var high = d3.max(_sound)
-      var low = d3.min(_sound)
+      if (!this.props.multiple) {
+        _sound = this.props.data.data.map((d) => d['sound'])
+        timestamp = this.props.data.data.map((d) => d['timestamp'])
+        high = d3.max(_sound)
+        low = d3.min(_sound)
+        _sound = [ _sound ]
+      } else {
+        _sound = this.props.data.map((d) => {
+          return d.data.map((_d) => _d['sound'])
+        })
+        timestamp = this.props.data[0].data.map((d) => d['timestamp'])
+        high = d3.max(_sound.map((sound) => d3.max(sound)))
+        low = d3.min(_sound.map((sound) => d3.min(sound)))
+      }
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -38,9 +48,7 @@ const NoiseChart = React.createClass({
 
       airData = {
         labels: _labels,
-        series: [
-          _sound
-        ]
+        series: _sound
       }
 
       noiseChart = <ChartistGraph data={airData} options={biPolarLineChartOptions} type={'Line'} />

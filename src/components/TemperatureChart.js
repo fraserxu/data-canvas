@@ -8,12 +8,23 @@ const TemperatureChart = React.createClass({
   displayName: 'TemperatureChart',
 
   render() {
-    var temperatureChart, temeratureData
+    var temperatureChart, temeratureData, _data, timestamp, high, low;
     if (this.props.data) {
-      var _air = this.props.data.data.map((d) => d['temperature'])
-      var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      var high = d3.max(_air)
-      var low = d3.min(_air)
+      if (!this.props.multiple) {
+        _data = this.props.data.data.map((d) => d['temperature'])
+        timestamp = this.props.data.data.map((d) => d['timestamp'])
+        high = d3.max(_data)
+        low = d3.min(_data)
+        _data = [ _data ]
+      } else {
+        _data = this.props.data.map((d) => {
+          return d.data.map((_d) => _d['temperature'])
+        })
+        timestamp = this.props.data[0].data.map((d) => d['timestamp'])
+        high = d3.max(_data.map((data) => d3.max(data)))
+        low = d3.min(_data.map((data) => d3.min(data)))
+      }
+
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -38,9 +49,7 @@ const TemperatureChart = React.createClass({
 
       temeratureData = {
         labels: _labels,
-        series: [
-          _air
-        ]
+        series: _data
       }
 
       temperatureChart = <ChartistGraph data={temeratureData} options={biPolarLineChartOptions} type={'Line'} />

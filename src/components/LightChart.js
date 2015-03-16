@@ -8,12 +8,22 @@ const LightChart = React.createClass({
   displayName: 'LightChart',
 
   render() {
-    var lightChart, lightData, high, low
+    var lightChart, lightData, _light, timestamp, high, low;
     if (this.props.data) {
-      var _light = this.props.data.data.map((d) => d['light'])
-      var timestamp = this.props.data.data.map((d) => d['timestamp'])
-      var high = d3.max(_light)
-      var low = d3.min(_light)
+      if (!this.props.multiple) {
+        _light = this.props.data.data.map((d) => d['light'])
+        timestamp = this.props.data.data.map((d) => d['timestamp'])
+        high = d3.max(_light)
+        low = d3.min(_light)
+        _light = [ _light ]
+      } else {
+        _light = this.props.data.map((d) => {
+          return d.data.map((_d) => _d['light'])
+        })
+        timestamp = this.props.data[0].data.map((d) => d['timestamp'])
+        high = d3.max(_light.map((light) => d3.max(light)))
+        low = d3.min(_light.map((light) => d3.min(light)))
+      }
 
       let _labels = timestamp
       if (this.props.dataRange == 'day') {
@@ -38,9 +48,7 @@ const LightChart = React.createClass({
 
       lightData = {
         labels: _labels,
-        series: [
-          _light
-        ]
+        series: _light
       }
 
       lightChart = <ChartistGraph data={lightData} options={biPolarLineChartOptions} type={'Line'} />

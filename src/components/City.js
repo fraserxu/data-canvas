@@ -33,7 +33,7 @@ const City = React.createClass({
   },
 
   fetchData(props) {
-    if (!this.state.data || !this.state.flickUrl) {
+    if ((!this.state.data || !this.state.flickUrl) && props.type === 'overall') {
       api.getWeatherByCityID(props.id, (data) => {
         if (!data) return
         let size = this.props.showDetail ? 'b' : 'n'

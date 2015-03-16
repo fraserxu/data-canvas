@@ -31,6 +31,7 @@
     "moment": "^2.9.0",
     "react": "^0.12.2",
     "react-chartist": "^0.3.0",
+    "run-parallel": "^1.0.0",
     "twix": "^0.6.2",
     "xhr": "^2.0.1"
   }

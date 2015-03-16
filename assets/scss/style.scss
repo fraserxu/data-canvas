@@ -99,6 +99,24 @@ html, body {
   }
 }
 
+.selector {
+  text-align: center;
+  margin: 20px auto;
+  .cities li {
+    display: inline;
+    margin-right: 15px;
+    padding: 5px 10px;
+    background: #fff;
+    cursor: pointer;
+    &:hover {
+      background: whitesmoke;
+    }
+    &.selected {
+      background: #ccc;
+    }
+  }
+}
+
 .city {
   text-align: center;
   .charts-container {
