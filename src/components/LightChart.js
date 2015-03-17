@@ -8,7 +8,7 @@ const LightChart = React.createClass({
   displayName: 'LightChart',
 
   render() {
-    var lightChart, lightData, _light, timestamp, high, low;
+    var lightChart, lightData, _light, timestamp, high, low, biPolarLineChartOptions;
     if (this.props.data) {
       if (!this.props.multiple) {
         _light = this.props.data.data.map((d) => d['light'])
@@ -16,6 +16,17 @@ const LightChart = React.createClass({
         high = d3.max(_light)
         low = d3.min(_light)
         _light = [ _light ]
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: true,
+          showLine: false,
+          showPoint: false,
+          axisX: {
+            showLabel: true,
+            showGrid: false
+          }
+        }
       } else {
         _light = this.props.data.map((d) => {
           return d.data.map((_d) => _d['light'])
@@ -23,6 +34,17 @@ const LightChart = React.createClass({
         timestamp = this.props.data[0].data.map((d) => d['timestamp'])
         high = d3.max(_light.map((light) => d3.max(light)))
         low = d3.min(_light.map((light) => d3.min(light)))
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: false,
+          showLine: true,
+          showPoint: true,
+          axisX: {
+            showLabel: true,
+            showGrid: true
+          }
+        }
       }
 
       let _labels = timestamp
@@ -32,18 +54,6 @@ const LightChart = React.createClass({
         _labels = timestamp.map((d) => moment(d).format('dd'))
       } else if (this.props.dataRange == 'month') {
         _labels = timestamp.map((d) => moment(d).format('DD'))
-      }
-
-      const biPolarLineChartOptions = {
-        high: high || 2000,
-        low: low || 0,
-        showArea: true,
-        showLine: false,
-        showPoint: false,
-        axisX: {
-          showLabel: true,
-          showGrid: false
-        }
       }
 
       lightData = {

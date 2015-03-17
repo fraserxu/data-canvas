@@ -8,7 +8,7 @@ const DustChart = React.createClass({
   displayName: 'DustChart',
 
   render() {
-    let dustChart, dustData, _dust, timestamp, high, low;
+    let dustChart, dustData, _dust, timestamp, high, low, biPolarLineChartOptions;
     if (this.props.data) {
       if (!this.props.multiple) {
         _dust = this.props.data.data.map((d) => d['dust'])
@@ -16,6 +16,17 @@ const DustChart = React.createClass({
         high = d3.max(_dust)
         low = d3.min(_dust)
         _dust = [ _dust ]
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: true,
+          showLine: false,
+          showPoint: false,
+          axisX: {
+            showLabel: true,
+            showGrid: false
+          }
+        }
       } else {
         _dust = this.props.data.map((d) => {
           return d.data.map((_d) => _d['dust'])
@@ -23,6 +34,17 @@ const DustChart = React.createClass({
         timestamp = this.props.data[0].data.map((d) => d['timestamp'])
         high = d3.max(_dust.map((dust) => d3.max(dust)))
         low = d3.min(_dust.map((dust) => d3.min(dust)))
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: false,
+          showLine: true,
+          showPoint: true,
+          axisX: {
+            showLabel: true,
+            showGrid: true
+          }
+        }
       }
 
       let _labels = timestamp
@@ -32,18 +54,6 @@ const DustChart = React.createClass({
         _labels = timestamp.map((d) => moment(d).format('dd'))
       } else if (this.props.dataRange == 'month') {
         _labels = timestamp.map((d) => moment(d).format('DD'))
-      }
-
-      const biPolarLineChartOptions = {
-        high: high || 3000,
-        low: low || 0,
-        showArea: true,
-        showLine: false,
-        showPoint: false,
-        axisX: {
-          showLabel: true,
-          showGrid: false
-        }
       }
 
       dustData = {

@@ -8,7 +8,7 @@ const AirChart = React.createClass({
   displayName: 'AirChart',
 
   render() {
-    let airChart, airData, _air, timestamp, high, low;
+    let airChart, airData, _air, timestamp, high, low, biPolarLineChartOptions;
     if (this.props.data) {
       if (!this.props.multiple) {
         _air = this.props.data.data.map((d) => d['airquality_raw'])
@@ -16,6 +16,17 @@ const AirChart = React.createClass({
         high = d3.max(_air)
         low = d3.min(_air)
         _air = [ _air ]
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: true,
+          showLine: false,
+          showPoint: false,
+          axisX: {
+            showLabel: true,
+            showGrid: false
+          }
+        }
       } else {
         _air = this.props.data.map((d) => {
           return d.data.map((_d) => _d['airquality_raw'])
@@ -23,6 +34,17 @@ const AirChart = React.createClass({
         timestamp = this.props.data[0].data.map((d) => d['timestamp'])
         high = d3.max(_air.map((air) => d3.max(air)))
         low = d3.min(_air.map((air) => d3.min(air)))
+        biPolarLineChartOptions = {
+          high: high || 150,
+          low: low || 0,
+          showArea: false,
+          showLine: true,
+          showPoint: true,
+          axisX: {
+            showLabel: true,
+            showGrid: true
+          }
+        }
       }
 
       let _labels = timestamp
@@ -32,18 +54,6 @@ const AirChart = React.createClass({
         _labels = timestamp.map((d) => moment(d).format('dd'))
       } else if (this.props.dataRange == 'month') {
         _labels = timestamp.map((d) => moment(d).format('DD'))
-      }
-
-      const biPolarLineChartOptions = {
-        high: high || 150,
-        low: low || 0,
-        showArea: true,
-        showLine: false,
-        showPoint: false,
-        axisX: {
-          showLabel: true,
-          showGrid: false
-        }
       }
 
       airData = {

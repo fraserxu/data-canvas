@@ -57,6 +57,7 @@ const App = React.createClass({
 
   render() {
     let { dataRange, cities, comparedCities } = this.state
+    let colors = ['#d70206', '#f05b4f', '#f4c63d', '#d17905', '#453d3f', '#59922b', '#0544d3']
 
     return (
       <div className='main'>
@@ -96,8 +97,14 @@ const App = React.createClass({
               <div className='selector'>
                 <ul className='cities'>
                   {Object.keys(cities).map((city, index) => {
+                    let style;
                     let selected = (comparedCities.indexOf(city) >= 0) ? 'selected' : '';
-                    return <li className={selected} onClick={this.setSelectedCity.bind(this, city)} key={index}>{city}</li>
+                    if (selected) {
+                      style = {
+                        borderBottom: `2px solid ${colors[comparedCities.indexOf(city)]}`
+                      }
+                    }
+                    return <li style={style} className={selected} onClick={this.setSelectedCity.bind(this, city)} key={index}>{city}</li>
                   })}
                 </ul>
               </div>
