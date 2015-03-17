@@ -49,7 +49,6 @@ const App = React.createClass({
     } else {
       comparedCities.push(value);
     }
-    console.log('comparedCities', comparedCities);
     this.setState({
       comparedCities: comparedCities
     });

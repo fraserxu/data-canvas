@@ -14,6 +14,7 @@ deploy:
 	git reset --hard origin/master && \
 	make install && \
 	mkdir -p dist && \
+	make install && \
 	make build && \
 	git add -Af dist && \
 	git commit -am 'gh-pages update' && \

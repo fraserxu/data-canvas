@@ -2,10 +2,41 @@ import React from 'react';
 import ChartistGraph from 'react-chartist';
 import d3 from 'd3';
 import moment from 'moment';
+import $ from 'jquery';
 
 const LightChart = React.createClass({
 
   displayName: 'LightChart',
+
+  componentDidMount() {
+    let el = this.getDOMNode();
+    let $chart = $(el).find('.ct-chart');
+
+    $chart.css({ position: 'relative'});
+
+    let $toolTip = $chart
+      .append('<div class="tooltip"></div>')
+      .find('.tooltip')
+      .hide();
+
+    $chart.on('mouseenter', '.ct-point', function() {
+      let $point = $(this),
+        value = $point.attr('ct:value'),
+        seriesName = $point.parent().attr('ct:series-name');
+      $toolTip.html(seriesName + '<br>' + value).show();
+    });
+
+    $chart.on('mouseleave', '.ct-point', function() {
+      $toolTip.hide();
+    });
+
+    $chart.on('mousemove', function(event) {
+      $toolTip.css({
+        left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,
+        top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40
+      });
+    });
+  },
 
   render() {
     var lightChart, lightData, _light, timestamp, high, low, biPolarLineChartOptions;
@@ -29,11 +60,14 @@ const LightChart = React.createClass({
         }
       } else {
         _light = this.props.data.map((d) => {
-          return d.data.map((_d) => _d['light'])
+          return {
+            name: d.data[0].city,
+            data: d.data.map((_d) => _d['light'])
+          }
         })
         timestamp = this.props.data[0].data.map((d) => d['timestamp'])
-        high = d3.max(_light.map((light) => d3.max(light)))
-        low = d3.min(_light.map((light) => d3.min(light)))
+        high = d3.max(_light.map((light) => d3.max(light.data)))
+        low = d3.min(_light.map((light) => d3.min(light.data)))
         biPolarLineChartOptions = {
           high: high || 150,
           low: low || 0,

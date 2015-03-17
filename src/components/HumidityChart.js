@@ -2,10 +2,41 @@ import React from 'react';
 import ChartistGraph from 'react-chartist';
 import d3 from 'd3';
 import moment from 'moment';
+import $ from 'jquery';
 
 const HumidityChart = React.createClass({
 
   displayName: 'HumidityChart',
+
+  componentDidMount() {
+    let el = this.getDOMNode();
+    let $chart = $(el).find('.ct-chart');
+
+    $chart.css({ position: 'relative'});
+
+    let $toolTip = $chart
+      .append('<div class="tooltip"></div>')
+      .find('.tooltip')
+      .hide();
+
+    $chart.on('mouseenter', '.ct-point', function() {
+      let $point = $(this),
+        value = $point.attr('ct:value'),
+        seriesName = $point.parent().attr('ct:series-name');
+      $toolTip.html(seriesName + '<br>' + value).show();
+    });
+
+    $chart.on('mouseleave', '.ct-point', function() {
+      $toolTip.hide();
+    });
+
+    $chart.on('mousemove', function(event) {
+      $toolTip.css({
+        left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,
+        top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40
+      });
+    });
+  },
 
   render() {
     var humidityChart, humidityData, _humidity, timestamp, high, low, biPolarLineChartOptions;
@@ -29,11 +60,14 @@ const HumidityChart = React.createClass({
         }
       } else {
         _humidity = this.props.data.map((d) => {
-          return d.data.map((_d) => _d['humidity'])
+          return {
+            name: d.data[0].city,
+            data: d.data.map((_d) => _d['humidity'])
+          }
         })
         timestamp = this.props.data[0].data.map((d) => d['timestamp'])
-        high = d3.max(_humidity.map((humidity) => d3.max(humidity)))
-        low = d3.min(_humidity.map((humidity) => d3.min(humidity)))
+        high = d3.max(_humidity.map((humidity) => d3.max(humidity.data)))
+        low = d3.min(_humidity.map((humidity) => d3.min(humidity.data)))
         biPolarLineChartOptions = {
           high: high || 150,
           low: low || 0,
