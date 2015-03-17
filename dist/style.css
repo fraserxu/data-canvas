@@ -1,0 +1,1062 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:600');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #eee;
+  font: 600 12px/1 'Open Sans', sans-serif; }
+
+.wrapper {
+  margin: 20px auto; }
+
+[class*="col-"] {
+  margin-bottom: 20px;
+  min-height: 30px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
+
+@media all and (min-width: 500px) {
+  .wrapper {
+    padding: 0 20px; }
+  .row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+  [class*="col-"] {
+    margin-right: 20px; }
+  [class*="col-"]:last-child {
+    margin-right: 0; }
+  .col-1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+  .col-2 {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+        -ms-flex: 2;
+            flex: 2; }
+  .col-3 {
+    -webkit-box-flex: 3;
+    -webkit-flex: 3;
+        -ms-flex: 3;
+            flex: 3; }
+  .col-4 {
+    -webkit-box-flex: 4;
+    -webkit-flex: 4;
+        -ms-flex: 4;
+            flex: 4; }
+  .col-5 {
+    -webkit-box-flex: 5;
+    -webkit-flex: 5;
+        -ms-flex: 5;
+            flex: 5; }
+  .col-6 {
+    -webkit-box-flex: 6;
+    -webkit-flex: 6;
+        -ms-flex: 6;
+            flex: 6; }
+  .col-7 {
+    -webkit-box-flex: 7;
+    -webkit-flex: 7;
+        -ms-flex: 7;
+            flex: 7; }
+  .col-8 {
+    -webkit-box-flex: 8;
+    -webkit-flex: 8;
+        -ms-flex: 8;
+            flex: 8; }
+  .col-9 {
+    -webkit-box-flex: 9;
+    -webkit-flex: 9;
+        -ms-flex: 9;
+            flex: 9; }
+  .col-10 {
+    -webkit-box-flex: 10;
+    -webkit-flex: 10;
+        -ms-flex: 10;
+            flex: 10; }
+  .col-11 {
+    -webkit-box-flex: 11;
+    -webkit-flex: 11;
+        -ms-flex: 11;
+            flex: 11; }
+  .col-12 {
+    -webkit-box-flex: 12;
+    -webkit-flex: 12;
+        -ms-flex: 12;
+            flex: 12; } }
+
+@media all and (min-width: 1440px) {
+  .wrapper {
+    max-width: 1440px; } }
+
+.main > header {
+  padding: 30px;
+  font: 600 20px/1 'Open Sans', sans-serif;
+  text-align: center;
+  color: #777;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
+  .main > header .title {
+    display: inline; }
+  .main > header .control {
+    display: inline;
+    font-size: 14px;
+    position: absolute;
+    line-height: 27px;
+    top: 27px; }
+    .main > header .control.right {
+      right: 15px; }
+    .main > header .control.left {
+      left: 27px; }
+    .main > header .control .label {
+      font-size: 12px; }
+  .main > header .options {
+    display: inline-block;
+    margin-left: 5px; }
+    .main > header .options li {
+      display: inline;
+      list-style: none;
+      padding-right: 5px;
+      cursor: pointer; }
+      .main > header .options li.active {
+        color: #000;
+        font-weight: bold; }
+
+.selector {
+  text-align: center;
+  margin: 20px auto; }
+  .selector .cities li {
+    display: inline;
+    margin-right: 15px;
+    padding: 5px 10px;
+    background: #fff;
+    cursor: pointer; }
+    .selector .cities li:hover {
+      background: whitesmoke; }
+    .selector .cities li.selected {
+      background: #ccc; }
+
+.city {
+  text-align: center; }
+  .city .charts-container {
+    margin-top: 20px; }
+  .city header {
+    height: 160px;
+    color: whitesmoke;
+    font: 600 14px/1 'Open Sans';
+    position: relative;
+    opacity: .8;
+    cursor: pointer; }
+    .city header .title {
+      margin-top: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 2px solid whitesmoke; }
+    .city header .temp {
+      display: block; }
+    .city header .weather {
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+    .city header:hover {
+      opacity: 1; }
+  .city .header {
+    padding: 10px;
+    height: 30px;
+    background: #fff; }
+  .city .indicator {
+    margin: 20px 0; }
+    .city .indicator .help {
+      cursor: pointer;
+      color: steelblue; }
+
+footer {
+  text-align: center;
+  margin: 20px auto; }
+  footer p {
+    margin-bottom: 10px; }
+
+.radar-chart .level {
+  stroke: grey;
+  stroke-width: 0.5; }
+
+.radar-chart .axis line {
+  stroke: grey;
+  stroke-width: 1; }
+
+.radar-chart .axis .legend {
+  font-family: sans-serif;
+  font-size: 10px; }
+
+.radar-chart .axis .legend.top {
+  dy: 1em; }
+
+.radar-chart .axis .legend.left {
+  text-anchor: start; }
+
+.radar-chart .axis .legend.middle {
+  text-anchor: middle; }
+
+.radar-chart .axis .legend.right {
+  text-anchor: end; }
+
+.radar-chart .tooltip {
+  font-family: sans-serif;
+  font-size: 13px;
+  -webkit-transition: opacity 200ms;
+          transition: opacity 200ms;
+  opacity: 0; }
+
+.radar-chart .tooltip.visible {
+  opacity: 1; }
+
+/* area transition when hovering */
+.radar-chart .area {
+  stroke-width: 2;
+  fill-opacity: 0.5; }
+
+.radar-chart.focus .area {
+  fill-opacity: 0.1; }
+
+.radar-chart.focus .area.focused {
+  fill-opacity: 0.7; }
+
+.radar-chart .circle {
+  fill-opacity: 0.9; }
+
+/* transitions */
+.radar-chart .area, .radar-chart .circle {
+  -webkit-transition: opacity 300ms, fill-opacity 200ms;
+          transition: opacity 300ms, fill-opacity 200ms;
+  opacity: 1; }
+
+.radar-chart .d3-enter, .radar-chart .d3-exit {
+  opacity: 0; }
+
+.radar-chart .area {
+  fill-opacity: 0.7; }
+
+.radar-chart.focus .area {
+  fill-opacity: 0.3; }
+
+.radar-chart.focus .area.focused {
+  fill-opacity: 0.9; }
+
+.area.germany, .germany .circle {
+  fill: #ADD8E6;
+  stroke: none; }
+
+.area.argentina, .argentina .circle {
+  fill: #ADD8E6;
+  stroke: none; }
+
+.ct-chart .ct-label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  text-align: left; }
+.ct-chart .ct-label.ct-horizontal {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  text-align: left; }
+.ct-chart .ct-label.ct-vertical {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  text-align: right; }
+.ct-chart .ct-grid {
+  stroke: rgba(0, 0, 0, 0.2);
+  stroke-width: 1px;
+  stroke-dasharray: 2px; }
+.ct-chart .ct-point {
+  stroke-width: 10px;
+  stroke-linecap: round; }
+.ct-chart .ct-line {
+  fill: none;
+  stroke-width: 4px; }
+.ct-chart .ct-area {
+  stroke: none;
+  fill-opacity: 0.1; }
+.ct-chart .ct-bar {
+  fill: none;
+  stroke-width: 10px; }
+.ct-chart .ct-slice.ct-donut {
+  fill: none;
+  stroke-width: 60px; }
+.ct-chart .ct-series.ct-series-a .ct-point, .ct-chart .ct-series.ct-series-a .ct-line, .ct-chart .ct-series.ct-series-a .ct-bar, .ct-chart .ct-series.ct-series-a .ct-slice.ct-donut {
+  stroke: #d70206; }
+.ct-chart .ct-series.ct-series-a .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-a .ct-area {
+  fill: #d70206; }
+.ct-chart .ct-series.ct-series-b .ct-point, .ct-chart .ct-series.ct-series-b .ct-line, .ct-chart .ct-series.ct-series-b .ct-bar, .ct-chart .ct-series.ct-series-b .ct-slice.ct-donut {
+  stroke: #f05b4f; }
+.ct-chart .ct-series.ct-series-b .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-b .ct-area {
+  fill: #f05b4f; }
+.ct-chart .ct-series.ct-series-c .ct-point, .ct-chart .ct-series.ct-series-c .ct-line, .ct-chart .ct-series.ct-series-c .ct-bar, .ct-chart .ct-series.ct-series-c .ct-slice.ct-donut {
+  stroke: #f4c63d; }
+.ct-chart .ct-series.ct-series-c .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-c .ct-area {
+  fill: #f4c63d; }
+.ct-chart .ct-series.ct-series-d .ct-point, .ct-chart .ct-series.ct-series-d .ct-line, .ct-chart .ct-series.ct-series-d .ct-bar, .ct-chart .ct-series.ct-series-d .ct-slice.ct-donut {
+  stroke: #d17905; }
+.ct-chart .ct-series.ct-series-d .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-d .ct-area {
+  fill: #d17905; }
+.ct-chart .ct-series.ct-series-e .ct-point, .ct-chart .ct-series.ct-series-e .ct-line, .ct-chart .ct-series.ct-series-e .ct-bar, .ct-chart .ct-series.ct-series-e .ct-slice.ct-donut {
+  stroke: #453d3f; }
+.ct-chart .ct-series.ct-series-e .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-e .ct-area {
+  fill: #453d3f; }
+.ct-chart .ct-series.ct-series-f .ct-point, .ct-chart .ct-series.ct-series-f .ct-line, .ct-chart .ct-series.ct-series-f .ct-bar, .ct-chart .ct-series.ct-series-f .ct-slice.ct-donut {
+  stroke: #59922b; }
+.ct-chart .ct-series.ct-series-f .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-f .ct-area {
+  fill: #59922b; }
+.ct-chart .ct-series.ct-series-g .ct-point, .ct-chart .ct-series.ct-series-g .ct-line, .ct-chart .ct-series.ct-series-g .ct-bar, .ct-chart .ct-series.ct-series-g .ct-slice.ct-donut {
+  stroke: #0544d3; }
+.ct-chart .ct-series.ct-series-g .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-g .ct-area {
+  fill: #0544d3; }
+.ct-chart .ct-series.ct-series-h .ct-point, .ct-chart .ct-series.ct-series-h .ct-line, .ct-chart .ct-series.ct-series-h .ct-bar, .ct-chart .ct-series.ct-series-h .ct-slice.ct-donut {
+  stroke: #6b0392; }
+.ct-chart .ct-series.ct-series-h .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-h .ct-area {
+  fill: #6b0392; }
+.ct-chart .ct-series.ct-series-i .ct-point, .ct-chart .ct-series.ct-series-i .ct-line, .ct-chart .ct-series.ct-series-i .ct-bar, .ct-chart .ct-series.ct-series-i .ct-slice.ct-donut {
+  stroke: #f05b4f; }
+.ct-chart .ct-series.ct-series-i .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-i .ct-area {
+  fill: #f05b4f; }
+.ct-chart .ct-series.ct-series-j .ct-point, .ct-chart .ct-series.ct-series-j .ct-line, .ct-chart .ct-series.ct-series-j .ct-bar, .ct-chart .ct-series.ct-series-j .ct-slice.ct-donut {
+  stroke: #dda458; }
+.ct-chart .ct-series.ct-series-j .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-j .ct-area {
+  fill: #dda458; }
+.ct-chart .ct-series.ct-series-k .ct-point, .ct-chart .ct-series.ct-series-k .ct-line, .ct-chart .ct-series.ct-series-k .ct-bar, .ct-chart .ct-series.ct-series-k .ct-slice.ct-donut {
+  stroke: #eacf7d; }
+.ct-chart .ct-series.ct-series-k .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-k .ct-area {
+  fill: #eacf7d; }
+.ct-chart .ct-series.ct-series-l .ct-point, .ct-chart .ct-series.ct-series-l .ct-line, .ct-chart .ct-series.ct-series-l .ct-bar, .ct-chart .ct-series.ct-series-l .ct-slice.ct-donut {
+  stroke: #86797d; }
+.ct-chart .ct-series.ct-series-l .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-l .ct-area {
+  fill: #86797d; }
+.ct-chart .ct-series.ct-series-m .ct-point, .ct-chart .ct-series.ct-series-m .ct-line, .ct-chart .ct-series.ct-series-m .ct-bar, .ct-chart .ct-series.ct-series-m .ct-slice.ct-donut {
+  stroke: #b2c326; }
+.ct-chart .ct-series.ct-series-m .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-m .ct-area {
+  fill: #b2c326; }
+.ct-chart .ct-series.ct-series-n .ct-point, .ct-chart .ct-series.ct-series-n .ct-line, .ct-chart .ct-series.ct-series-n .ct-bar, .ct-chart .ct-series.ct-series-n .ct-slice.ct-donut {
+  stroke: #6188e2; }
+.ct-chart .ct-series.ct-series-n .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-n .ct-area {
+  fill: #6188e2; }
+.ct-chart .ct-series.ct-series-o .ct-point, .ct-chart .ct-series.ct-series-o .ct-line, .ct-chart .ct-series.ct-series-o .ct-bar, .ct-chart .ct-series.ct-series-o .ct-slice.ct-donut {
+  stroke: #a748ca; }
+.ct-chart .ct-series.ct-series-o .ct-slice:not(.ct-donut), .ct-chart .ct-series.ct-series-o .ct-area {
+  fill: #a748ca; }
+.ct-chart.ct-square {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-square:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 100%; }
+  .ct-chart.ct-square:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-square > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-minor-second {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-minor-second:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 93.75%; }
+  .ct-chart.ct-minor-second:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-minor-second > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-second {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-second:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 88.88889%; }
+  .ct-chart.ct-major-second:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-second > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-minor-third {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-minor-third:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 83.33333%; }
+  .ct-chart.ct-minor-third:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-minor-third > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-third {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-third:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 80%; }
+  .ct-chart.ct-major-third:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-third > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-perfect-fourth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-perfect-fourth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 75%; }
+  .ct-chart.ct-perfect-fourth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-perfect-fourth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-perfect-fifth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-perfect-fifth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 66.66667%; }
+  .ct-chart.ct-perfect-fifth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-perfect-fifth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-minor-sixth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-minor-sixth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 62.5%; }
+  .ct-chart.ct-minor-sixth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-minor-sixth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-golden-section {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-golden-section:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 61.8047%; }
+  .ct-chart.ct-golden-section:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-golden-section > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-sixth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-sixth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 60%; }
+  .ct-chart.ct-major-sixth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-sixth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-minor-seventh {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-minor-seventh:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 56.25%; }
+  .ct-chart.ct-minor-seventh:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-minor-seventh > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-seventh {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-seventh:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 53.33333%; }
+  .ct-chart.ct-major-seventh:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-seventh > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-octave {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-octave:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 50%; }
+  .ct-chart.ct-octave:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-octave > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-tenth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-tenth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 40%; }
+  .ct-chart.ct-major-tenth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-tenth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-eleventh {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-eleventh:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 37.5%; }
+  .ct-chart.ct-major-eleventh:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-eleventh > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-major-twelfth {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-major-twelfth:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 33.33333%; }
+  .ct-chart.ct-major-twelfth:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-major-twelfth > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+.ct-chart.ct-double-octave {
+  display: block;
+  position: relative;
+  width: 100%; }
+  .ct-chart.ct-double-octave:before {
+    display: block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    padding-bottom: 25%; }
+  .ct-chart.ct-double-octave:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .ct-chart.ct-double-octave > svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+.tooltip {
+  position: absolute;
+  display: inline-block;
+  min-width: 5em;
+  padding: 0.5em;
+  background: #F4C63D;
+  color: #453D3F;
+  font-weight: 700;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1; }
+  .tooltip:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top-color: #F4C63D; }
+
+/*! Hint.css - v1.3.4 - 2015-02-28
+* http://kushagragour.in/lab/hint/
+* Copyright (c) 2015 Kushagra Gour; Licensed MIT */
+/*-------------------------------------*\
+  HINT.css - A CSS tooltip library
+\*-------------------------------------*/
+/**
+ * HINT.css is a tooltip library made in pure CSS.
+ *
+ * Source: https://github.com/chinchang/hint.css
+ * Demo: http://kushagragour.in/lab/hint/
+ *
+ * Release under The MIT License
+ *
+ */
+/**
+ * source: hint-core.scss
+ *
+ * Defines the basic styling for the tooltip.
+ * Each tooltip is made of 2 parts:
+ *  1) body (:after)
+ *  2) arrow (:before)
+ *
+ * Classes added:
+ *  1) hint
+ */
+.hint, [data-hint] {
+  position: relative;
+  display: inline-block;
+  /**
+   * tooltip arrow
+   */
+  /**
+   * tooltip body
+   */ }
+
+.hint:before, .hint:after, [data-hint]:before, [data-hint]:after {
+  position: absolute;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1000000;
+  pointer-events: none;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  -webkit-transition-delay: 0ms;
+  transition-delay: 0ms; }
+
+.hint:hover:before, .hint:hover:after, .hint:focus:before, .hint:focus:after, [data-hint]:hover:before, [data-hint]:hover:after, [data-hint]:focus:before, [data-hint]:focus:after {
+  visibility: visible;
+  opacity: 1; }
+
+.hint:hover:before, .hint:hover:after, [data-hint]:hover:before, [data-hint]:hover:after {
+  -webkit-transition-delay: 100ms;
+  transition-delay: 100ms; }
+
+.hint:before, [data-hint]:before {
+  content: '';
+  position: absolute;
+  background: transparent;
+  border: 6px solid transparent;
+  z-index: 1000001; }
+
+.hint:after, [data-hint]:after {
+  content: attr(data-hint);
+  background: #383838;
+  color: white;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 12px;
+  width: 300px; }
+
+/**
+ * source: hint-position.scss
+ *
+ * Defines the positoning logic for the tooltips.
+ *
+ * Classes added:
+ *  1) hint--top
+ *  2) hint--bottom
+ *  3) hint--left
+ *  4) hint--right
+ */
+/**
+ * set default color for tooltip arrows
+ */
+.hint--top:before {
+  border-top-color: #383838; }
+
+.hint--bottom:before {
+  border-bottom-color: #383838; }
+
+.hint--left:before {
+  border-left-color: #383838; }
+
+.hint--right:before {
+  border-right-color: #383838; }
+
+/**
+ * top tooltip
+ */
+.hint--top:before {
+  margin-bottom: -12px; }
+
+.hint--top:after {
+  margin-left: -18px; }
+
+.hint--top:before, .hint--top:after {
+  bottom: 100%;
+  left: 50%; }
+
+.hint--top:hover:after, .hint--top:hover:before, .hint--top:focus:after, .hint--top:focus:before {
+  -webkit-transform: translateY(-8px);
+  -ms-transform: translateY(-8px);
+      transform: translateY(-8px); }
+
+/**
+ * bottom tooltip
+ */
+.hint--bottom:before {
+  margin-top: -12px; }
+
+.hint--bottom:after {
+  margin-left: -18px; }
+
+.hint--bottom:before, .hint--bottom:after {
+  top: 100%;
+  left: 50%; }
+
+.hint--bottom:hover:after, .hint--bottom:hover:before, .hint--bottom:focus:after, .hint--bottom:focus:before {
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+      transform: translateY(8px); }
+
+/**
+ * right tooltip
+ */
+.hint--right:before {
+  margin-left: -12px;
+  margin-bottom: -6px; }
+
+.hint--right:after {
+  margin-bottom: -14px; }
+
+.hint--right:before, .hint--right:after {
+  left: 100%;
+  bottom: 50%; }
+
+.hint--right:hover:after, .hint--right:hover:before, .hint--right:focus:after, .hint--right:focus:before {
+  -webkit-transform: translateX(8px);
+  -ms-transform: translateX(8px);
+      transform: translateX(8px); }
+
+/**
+ * left tooltip
+ */
+.hint--left:before {
+  margin-right: -12px;
+  margin-bottom: -6px; }
+
+.hint--left:after {
+  margin-bottom: -14px; }
+
+.hint--left:before, .hint--left:after {
+  right: 100%;
+  bottom: 50%; }
+
+.hint--left:hover:after, .hint--left:hover:before, .hint--left:focus:after, .hint--left:focus:before {
+  -webkit-transform: translateX(-8px);
+  -ms-transform: translateX(-8px);
+      transform: translateX(-8px); }
+
+/**
+ * source: hint-theme.scss
+ *
+ * Defines basic theme for tooltips.
+ *
+ */
+.hint, [data-hint] {
+  /**
+   * tooltip body
+   */ }
+
+.hint:after, [data-hint]:after {
+  text-shadow: 0 -1px 0px black;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); }
+
+/**
+ * source: hint-color-types.scss
+ *
+ * Contains tooltips of various types based on color differences.
+ *
+ * Classes added:
+ *  1) hint--error
+ *  2) hint--warning
+ *  3) hint--info
+ *  4) hint--success
+ *
+ */
+/**
+ * Error
+ */
+.hint--error:after {
+  background-color: #b34e4d;
+  text-shadow: 0 -1px 0px #592726; }
+
+.hint--error.hint--top:before {
+  border-top-color: #b34e4d; }
+
+.hint--error.hint--bottom:before {
+  border-bottom-color: #b34e4d; }
+
+.hint--error.hint--left:before {
+  border-left-color: #b34e4d; }
+
+.hint--error.hint--right:before {
+  border-right-color: #b34e4d; }
+
+/**
+ * Warning
+ */
+.hint--warning:after {
+  background-color: #c09854;
+  text-shadow: 0 -1px 0px #6c5328; }
+
+.hint--warning.hint--top:before {
+  border-top-color: #c09854; }
+
+.hint--warning.hint--bottom:before {
+  border-bottom-color: #c09854; }
+
+.hint--warning.hint--left:before {
+  border-left-color: #c09854; }
+
+.hint--warning.hint--right:before {
+  border-right-color: #c09854; }
+
+/**
+ * Info
+ */
+.hint--info:after {
+  background-color: #3986ac;
+  text-shadow: 0 -1px 0px #193b4d; }
+
+.hint--info.hint--top:before {
+  border-top-color: #3986ac; }
+
+.hint--info.hint--bottom:before {
+  border-bottom-color: #3986ac; }
+
+.hint--info.hint--left:before {
+  border-left-color: #3986ac; }
+
+.hint--info.hint--right:before {
+  border-right-color: #3986ac; }
+
+/**
+ * Success
+ */
+.hint--success:after {
+  background-color: #458746;
+  text-shadow: 0 -1px 0px #1a321a; }
+
+.hint--success.hint--top:before {
+  border-top-color: #458746; }
+
+.hint--success.hint--bottom:before {
+  border-bottom-color: #458746; }
+
+.hint--success.hint--left:before {
+  border-left-color: #458746; }
+
+.hint--success.hint--right:before {
+  border-right-color: #458746; }
+
+/**
+ * source: hint-always.scss
+ *
+ * Defines a persisted tooltip which shows always.
+ *
+ * Classes added:
+ *  1) hint--always
+ *
+ */
+.hint--always:after, .hint--always:before {
+  opacity: 1;
+  visibility: visible; }
+
+.hint--always.hint--top:after, .hint--always.hint--top:before {
+  -webkit-transform: translateY(-8px);
+  -ms-transform: translateY(-8px);
+      transform: translateY(-8px); }
+
+.hint--always.hint--bottom:after, .hint--always.hint--bottom:before {
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+      transform: translateY(8px); }
+
+.hint--always.hint--left:after, .hint--always.hint--left:before {
+  -webkit-transform: translateX(-8px);
+  -ms-transform: translateX(-8px);
+      transform: translateX(-8px); }
+
+.hint--always.hint--right:after, .hint--always.hint--right:before {
+  -webkit-transform: translateX(8px);
+  -ms-transform: translateX(8px);
+      transform: translateX(8px); }
+
+/**
+ * source: hint-rounded.scss
+ *
+ * Defines rounded corner tooltips.
+ *
+ * Classes added:
+ *  1) hint--rounded
+ *
+ */
+.hint--rounded:after {
+  border-radius: 4px; }
+
+/**
+ * source: hint-effects.scss
+ *
+ * Defines various transition effects for the tooltips.
+ *
+ * Classes added:
+ *  1) hint--no-animate
+ *  2) hint--bounce
+ *
+ */
+.hint--no-animate:before, .hint--no-animate:after {
+  -webkit-transition-duration: 0ms;
+  transition-duration: 0ms; }
+
+.hint--bounce:before, .hint--bounce:after {
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24); }
